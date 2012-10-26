@@ -1,10 +1,9 @@
+   Team X
 =====================
 
-   Team X
 
-
-----------------------
     PSE App
+----------------------
 
  This is the backend code for the Reffy application.
  Please, don't copy or use this code without permission.
