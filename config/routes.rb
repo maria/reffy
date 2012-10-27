@@ -1,4 +1,20 @@
 TeamX::Application.routes.draw do
+  resources :games
+
+  resources :sports
+
+  resources :teams
+
+  resources :team_games
+
+  resources :team_players
+
+  resources :tournaments
+
+  resources :tournament_games
+
+  resources :users
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

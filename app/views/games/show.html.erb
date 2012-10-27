@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Latitude:</b>
+  <%= @game.latitude %>
+</p>
+
+<p>
+  <b>Longitude:</b>
+  <%= @game.longitude %>
+</p>
+
+<p>
+  <b>Scor team1:</b>
+  <%= @game.scor_team1 %>
+</p>
+
+<p>
+  <b>Scor team2:</b>
+  <%= @game.scor_team2 %>
+</p>
+
+<p>
+  <b>Duration:</b>
+  <%= @game.duration %>
+</p>
+
+<p>
+  <b>Team1:</b>
+  <%= @game.team1_id %>
+</p>
+
+<p>
+  <b>Team2:</b>
+  <%= @game.team2_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_game_path(@game) %> |
+<%= link_to 'Back', games_path %>
