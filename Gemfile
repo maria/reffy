@@ -6,7 +6,11 @@ gem 'rails', '3.2.8'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'mysql2', '0.3.11'
+gem 'sqlite3'
 
+group :production do
+gem 'pg'
+end
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -25,7 +29,7 @@ gem 'jquery-rails'
 gem 'oauth'
 gem 'koala'
 gem "geokit-rails3"
-
+gem 'heroku'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
