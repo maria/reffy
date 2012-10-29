@@ -24,7 +24,6 @@ gem 'jquery-rails'
 gem 'oauth'
 gem 'koala'
 gem "geokit-rails3"
-gem 'heroku'
 
 gem 'thin'
 gem 'compass'
