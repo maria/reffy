@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
-  # GET /users
-  # GET /users.json
-  def index
+  #GET /users
+  #GET /users.json
+  Koala.http_service.http_options = {:ssl => {:ca_path => "/etc/ssl/certs"}}
+  
+    def index
     @users = User.all
 
     respond_to do |format|
@@ -91,6 +93,22 @@ end
     @access_token = params[:fb_access_token]
 
     begin
-      graph = Koala::Facebook::API.new(@access_token)
+      @graph = Koala::Facebook::API.new(@access_token)
+      user_fb = @graph.get_object("me")
     end
+
+    begin
+      @user = User.find_by_email(user_fb["email"])
+      if @user.blank?
+          # Assigns random password
+          rand_password = SecureRandom.hex(8)
+
+          @user = User.new(:name => user_fb["name"], :email => user_fb["email"],
+                                   :password => rand_password, :password_confirmation => rand_password)
+          @user.save
+      end
+    end
+  end
+
+  def create_user_from_mobile
   end
