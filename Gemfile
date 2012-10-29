@@ -10,7 +10,7 @@ group :development do
 end
 
 group :production do
-gem 'pg'
+  gem 'pg'
 end
 
 group :assets do
@@ -26,6 +26,8 @@ gem 'koala'
 gem "geokit-rails3"
 gem 'heroku'
 
+gem 'compass'
+gem 'haml'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
