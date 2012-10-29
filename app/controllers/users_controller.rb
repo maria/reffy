@@ -41,6 +41,7 @@ class UsersController < ApplicationController
 
   # POST /users
   # POST /users.json
+=begin
   def create
     @user = User.new(params[:user])
 
@@ -51,9 +52,10 @@ class UsersController < ApplicationController
       else
         format.html { render action: "new" }
         format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+     end
     end
   end
+=end
 
   # PUT /users/1
   # PUT /users/1.json
@@ -89,7 +91,7 @@ end
 #              Facebook API
 #=============================================
 
-  def connect_with_facebook
+  def create
     @access_token = params[:fb_access_token]
 
     begin
@@ -100,15 +102,20 @@ end
     begin
       @user = User.find_by_email(user_fb["email"])
       if @user.blank?
-          # Assigns random password
-          rand_password = SecureRandom.hex(8)
-
-          @user = User.new(:name => user_fb["name"], :email => user_fb["email"],
-                                   :password => rand_password, :password_confirmation => rand_password)
-          @user.save
+       rand_password = SecureRandom.hex(8)
+       @user = User.new(:name => user_fb["name"], :email => user_fb["email"],
+                        :password => rand_password, :password_confirmation => rand_password)
+    
+      respond_to do |format|
+        if @user.save
+          format.html { redirect_to @user, notice: 'User was successfully created.' }
+          format.json { render json: @user, status: :created, location: @user }
+        else
+          format.html { render action: "new" }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+        end
+       end
       end
     end
   end
 
-  def create_user_from_mobile
-  end
