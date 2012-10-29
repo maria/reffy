@@ -1,0 +1,35 @@
+<h1>Listing games</h1>
+
+<table>
+  <tr>
+    <th>Latitude</th>
+    <th>Longitude</th>
+    <th>Scor team1</th>
+    <th>Scor team2</th>
+    <th>Duration</th>
+    <th>Team1</th>
+    <th>Team2</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @games.each do |game| %>
+  <tr>
+    <td><%= game.latitude %></td>
+    <td><%= game.longitude %></td>
+    <td><%= game.scor_team1 %></td>
+    <td><%= game.scor_team2 %></td>
+    <td><%= game.duration %></td>
+    <td><%= game.team1_id %></td>
+    <td><%= game.team2_id %></td>
+    <td><%= link_to 'Show', game %></td>
+    <td><%= link_to 'Edit', edit_game_path(game) %></td>
+    <td><%= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Game', new_game_path %>
