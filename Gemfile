@@ -4,7 +4,7 @@ gem 'rails', '3.2.8'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-group :development do
+group :development, :test do
   gem 'mysql2', '0.3.11'
   gem 'sqlite3', '1.3.6'
 end
@@ -26,6 +26,7 @@ gem 'koala'
 gem "geokit-rails3"
 gem 'heroku'
 
+gem 'thin'
 gem 'compass'
 gem 'haml'
 # To use ActiveModel has_secure_password
