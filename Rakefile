@@ -5,3 +5,13 @@
 require File.expand_path('../config/application', __FILE__)
 
 TeamX::Application.load_tasks
+begin
+  require "rspec/core/rake_task"
+
+  desc "run all Examples"
+  RSpec::Core::RakeTask.new(:spec) do |t|
+    t.rspec_opts = %w[--color]
+    t.pattern = 'spec/*_spec.rb'
+  end
+rescue LoadError
+end
