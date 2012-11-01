@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
-  #GET /users
-  #GET /users.json
   Koala.http_service.http_options = {:ssl => {:ca_path => "/etc/ssl/certs"}}
   
+  #GET /users
+  #GET /users.json
     def index
     @users = User.all
 
@@ -41,7 +41,6 @@ class UsersController < ApplicationController
 
   # POST /users
   # POST /users.json
-=begin
   def create
     @user = User.new(params[:user])
 
@@ -54,8 +53,7 @@ class UsersController < ApplicationController
         format.json { render json: @user.errors, status: :unprocessable_entity }
      end
     end
-  end
-=end
+end
 
   # PUT /users/1
   # PUT /users/1.json
@@ -91,7 +89,7 @@ end
 #              Facebook API
 #=============================================
 
-  def create
+  def create_facebook_user
     @access_token = params[:fb_access_token]
 
     begin

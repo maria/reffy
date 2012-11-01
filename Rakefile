@@ -15,3 +15,5 @@ begin
   end
 rescue LoadError
 end
+
+require 'koala'

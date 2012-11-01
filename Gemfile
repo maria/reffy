@@ -21,8 +21,10 @@ end
 
 gem 'jquery-rails'
 
+gem 'devise'
 gem 'oauth'
 gem 'koala'
+
 gem "geokit-rails3"
 
 gem 'thin'
