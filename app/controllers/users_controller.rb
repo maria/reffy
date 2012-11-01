@@ -101,7 +101,7 @@ end
       @user = User.find_by_email(user_fb["email"])
       if @user.blank?
        rand_password = SecureRandom.hex(8)
-       @user = User.new(:name => user_fb["name"], :email => user_fb["email"],
+       @user = User.new(:name => user_fb["name"], :fb_id => user_fb["id"],
                         :password => rand_password, :password_confirmation => rand_password)
     
       respond_to do |format|
