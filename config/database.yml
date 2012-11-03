@@ -8,7 +8,6 @@ development:
   database: teamx
   host: localhost
   enconding: utf8
-  username: root
   pool: 8
   timeout: 5000
 
@@ -20,7 +19,6 @@ test:
   database: test_teamx
   host: localhost
   enconding: utf8
-  username: root
   pool: 8
   timeout: 5000
 
@@ -28,6 +26,5 @@ production:
   adapter: postgresql
   database: db_prod
   enconding: utf8
-  username: root
   pool: 5
   timeout: 5000
