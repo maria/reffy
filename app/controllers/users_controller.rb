@@ -98,12 +98,13 @@ end
     end
 
     begin
-      @user = User.find_by_email(user_fb["email"])
+      @user = User.find_by_fb_id(user_fb["id"])
+
       if @user.blank?
        rand_password = SecureRandom.hex(8)
        @user = User.new(:name => user_fb["name"], :fb_id => user_fb["id"],
                         :password => rand_password, :password_confirmation => rand_password)
-    
+
       respond_to do |format|
         if @user.save
           format.html { redirect_to @user, notice: 'User was successfully created.' }
@@ -113,6 +114,9 @@ end
           format.json { render json: @user.errors, status: :unprocessable_entity }
         end
        end
+
+      else
+        format.json { render json: @user, status: :existing, location: @user }
       end
     end
   end
