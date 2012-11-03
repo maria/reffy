@@ -23,6 +23,7 @@ end
 
 gem 'jquery-rails'
 
+gem 'oauth'
 gem 'koala'
 gem "geokit-rails3"
 
