@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
-  # GET /users
-  # GET /users.json
-  def index
+  Koala.http_service.http_options = {:ssl => {:ca_path => "/etc/ssl/certs"}}
+  
+  #GET /users
+  #GET /users.json
+    def index
     @users = User.all
 
     respond_to do |format|
@@ -49,9 +51,9 @@ class UsersController < ApplicationController
       else
         format.html { render action: "new" }
         format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+     end
     end
-  end
+end
 
   # PUT /users/1
   # PUT /users/1.json
@@ -87,10 +89,35 @@ end
 #              Facebook API
 #=============================================
 
-  def connect_with_facebook
+  def create_facebook_user
     @access_token = params[:fb_access_token]
 
     begin
-      graph = Koala::Facebook::API.new(@access_token)
+      @graph = Koala::Facebook::API.new(@access_token)
+      user_fb = @graph.get_object("me")
+    end
+
+    begin
+      @user = User.find_by_fb_id(user_fb["id"])
+
+      if @user.blank?
+       rand_password = SecureRandom.hex(8)
+       @user = User.new(:name => user_fb["name"], :fb_id => user_fb["id"],
+                        :password => rand_password, :password_confirmation => rand_password)
+
+      respond_to do |format|
+        if @user.save
+          format.html { redirect_to @user, notice: 'User was successfully created.' }
+          format.json { render json: @user, status: :created, location: @user }
+        else
+          format.html { render action: "new" }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+        end
+       end
+
+      else
+        format.json { render json: @user, status: :existing, location: @user }
+      end
     end
   end
+
