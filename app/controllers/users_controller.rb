@@ -94,7 +94,7 @@ end
       #@graph = Koala::Facebook::API.new(@access_token)
       #user_fb = @graph.get_object("me")
 
-      @user = User.find_by_fb_id(params["name"])
+      @user = User.find_by_fb_id(params["id"])
       if @user.blank?
        rand_password = SecureRandom.hex(8)
        @user = User.new(:name => params["name"], :fb_id => params["id"],
@@ -102,10 +102,8 @@ end
 
       respond_to do |format|
         if @user.save
-       #   format.html { :notice => "User was successfully created." }
           format.json { render :json => @user, :status => :created, :location => @user }
         else
-        #  format.html { render :action => "new" }
           format.json { render :json => @user.errors, :status => :unprocessable_entity }
         end
       end
