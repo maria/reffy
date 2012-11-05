@@ -47,17 +47,17 @@ class UsersController < ApplicationController
        rand_password = SecureRandom.hex(8)
        @user = User.new(name: params["name"], fb_id: params["id"],
                         :password => rand_password, :password_confirmation => rand_password)
-      end
 
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render json: @user, status: :created, location: @user }
+      respond_to do |format|
+        if @user.save
+          format.json { status:"created"}
+        else
+          format.json { render :json => @user.errors, :status => :unprocessable_entity }
+        end
+      end
       else
-        format.html { render action: "new" }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-     end
-    end
+        format.json {status:"existing"}
+      end
 end
 
   # PUT /users/1
@@ -89,33 +89,4 @@ end
   end
 end
 
-
-#=============================================
-#              Facebook API
-#=============================================
-
-  def facebook_user
-      @access_token = params[:fb_access_token]
-
-      #@graph = Koala::Facebook::API.new(@access_token)
-      #user_fb = @graph.get_object("me")
-
-      @user = User.find_by_fb_id(params["id"])
-      if @user.blank?
-       rand_password = SecureRandom.hex(8)
-       @user = User.new(:name => params["name"], :fb_id => params["id"],
-                        :password => rand_password, :password_confirmation => rand_password)
-
-      respond_to do |format|
-        if @user.save
-          format.json { render :json => @user, :status => :created, :location => @user }
-        else
-          format.json { render :json => @user.errors, :status => :unprocessable_entity }
-        end
-      end
-
-      else
-        format.json { render :json => @user, :status => :existing, :location => @user }
-      end
-  end
 
