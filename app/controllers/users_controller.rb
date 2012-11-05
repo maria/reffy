@@ -92,12 +92,9 @@ end
   def create_facebook_user
     @access_token = params[:fb_access_token]
 
-    begin
       @graph = Koala::Facebook::API.new(@access_token)
       user_fb = @graph.get_object("me")
-    end
 
-    begin
       @user = User.find_by_fb_id(user_fb["id"])
 
       if @user.blank?
@@ -113,11 +110,10 @@ end
           format.html { render action: "new" }
           format.json { render json: @user.errors, status: :unprocessable_entity }
         end
-       end
+      end
 
       else
         format.json { render json: @user, status: :existing, location: @user }
       end
-    end
   end
 
