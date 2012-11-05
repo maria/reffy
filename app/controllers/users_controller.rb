@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   Koala.http_service.http_options = {:ssl => {:ca_path => "/etc/ssl/certs"}}
-  
+  skip_before_filter :verify_authenticity_token 
   #GET /users
   #GET /users.json
     def index
@@ -90,7 +90,7 @@ end
 #=============================================
 
   def create_facebook_user
-    @access_token = params[:fb_access_token]
+      @access_token = params[:fb_access_token]
 
       @graph = Koala::Facebook::API.new(@access_token)
       user_fb = @graph.get_object("me")
