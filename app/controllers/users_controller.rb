@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   Koala.http_service.http_options = {:ssl => {:ca_path => "/etc/ssl/certs"}}
+  skip_before_filter  :verify_authenticity_token
   #GET /users
   #GET /users.json
     def index
