@@ -45,7 +45,7 @@ class UsersController < ApplicationController
       @user = User.find_by_fb_id(params["id"])
       if @user.blank?
        rand_password = SecureRandom.hex(8)
-       @user = User.new(name: params["name"], fb_id: params["id"],
+       @user = User.save(name: params["name"], fb_id: params["id"],
                         :password => rand_password, :password_confirmation => rand_password)
 
       respond_to do |format|
