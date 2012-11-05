@@ -90,7 +90,7 @@ end
 #              Facebook API
 #=============================================
 
-  def create_facebook_user
+  def facebook_user
       @access_token = params[:fb_access_token]
 
       #@graph = Koala::Facebook::API.new(@access_token)
