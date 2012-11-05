@@ -96,7 +96,7 @@ end
       #user_fb = @graph.get_object("me")
 
       @user = User.find_by_fb_id(params["id"])
-
+      print params["id"]
       if @user.blank?
        rand_password = SecureRandom.hex(8)
        @user = User.new(:name => params["name"], :fb_id => params["id"],
