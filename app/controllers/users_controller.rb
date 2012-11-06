@@ -55,6 +55,9 @@ class UsersController < ApplicationController
           format.json { render json: @user.errors, status: :unprocessable_entity }
        end
       end
+     else
+          format.html { redirect_to @user, notice: 'User is created.' }
+          format.json { render json: @user, status: :existing, location: @user }
      end
 end
 
