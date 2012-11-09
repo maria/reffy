@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121105174635) do
+ActiveRecord::Schema.define(:version => 20121109190439) do
 
   create_table "games", :force => true do |t|
     t.float    "latitude"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(:version => 20121105174635) do
     t.integer  "team2_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "state"
   end
 
   create_table "sports", :force => true do |t|
