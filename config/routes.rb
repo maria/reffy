@@ -8,7 +8,7 @@ TeamX::Application.routes.draw do
     member do
       get 'count_all_games'
     end
-    match '/show_all_games', to: 'teams#show_all_games', via: :get
+    match '/show_all_games', to: 'teams#show_all_games', via: :get, action: 'show_all_games'
   end
 
   resources :team_games

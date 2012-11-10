@@ -90,7 +90,7 @@ end
     
 
     respond_to do |format|
-      format.html { redirect_to @all_games }
+      format.html { redirect @team }
       format.json { render json: @all_games }
     end
     
