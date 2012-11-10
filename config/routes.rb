@@ -1,9 +1,15 @@
 TeamX::Application.routes.draw do
+   
   resources :games
 
   resources :sports
 
-  resources :teams
+  resources :teams do 
+    member do
+      get 'count_all_games'
+    end
+    match '/show_all_games', to: 'teams#show_all_games', via: :get
+  end
 
   resources :team_games
 
@@ -14,10 +20,8 @@ TeamX::Application.routes.draw do
   resources :tournament_games
 
   resources :users
-
-  # The priority is based upon order of creation:
-  # first created -> highest priority.
-
+  
+  
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
