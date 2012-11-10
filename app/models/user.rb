@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
 
   has_and_belongs_to_many :teams, foreign_key: 'user_id'
   has_many :sports, foreign_key: 'sport_id'
-
+  
+  has_many :teamplayers
 
 end
