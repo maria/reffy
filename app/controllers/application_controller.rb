@@ -54,6 +54,23 @@ class ApplicationController < ActionController::Base
       format.json {render json: @team_rating}
     end
   end
+ 
+  def show_all_user_games
+     @user = User.find(params["id"])
+     @all_games = []
+  
+     @all_team_games = Team.select('game_id').where("user_id = ?", @user.id)
+     
+     @all_team_games.find_each do |game|
+        @all_games += Game.where("id = ?", game)
+    
+     end
+     
+    respond_to do |format|
+      format.json {render json: @all_games}
+    end
+  end
+
 
 private
 

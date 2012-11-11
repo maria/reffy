@@ -46,7 +46,7 @@ class UsersController < ApplicationController
     
     respond_to do |format|
      if @user.blank?
-      @user = User.new(name: params["name"], fb_id: params["id"])
+      @user = User.new(name: params["name"], fb_id: params["id"], city: params["city"], initial: name[0])
 
       #respond_to do |format|
         if @user.save
@@ -92,12 +92,16 @@ end
   end
 end
 
+"
   def facebook_user
-    @user = User.find_by_fb_id(params["id"])
+    @user = User.find_by_fb_id(params["'id'"])
 
     if @user.blank?
       rand_password = SecureRandom.hex(8)
-      @user = User.new(:name => params["name"], :fb_id => params["id"],
+      @user = User.new(:name => params["'name"], :fb_id => params["id'"],
                         :password => rand_password, :password_confirmation => rand_password)
     end
   end
+"
+
+
