@@ -78,7 +78,6 @@ end
       end
     end
   end
-
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
@@ -90,8 +89,17 @@ end
       format.json { head :no_content }
     end
   end
-end
 
+ def user_sports
+  @user = User.find(params["id"])
+  
+  @user_sports = Sport.where('id = ?', @user.sport_id)
+  
+    respond_to do |format|
+      format.json { render json: @user_sports }
+    end
+  end
+end
 "
   def facebook_user
     @user = User.find_by_fb_id(params["'id'"])
