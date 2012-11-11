@@ -1,15 +1,13 @@
 TeamX::Application.routes.draw do
-   
+  
+  match 'teams/:id/show_all_games', to: 'application#show_all_games', via: :get, action: 'show_all_games' 
+  match 'teams/:id/count_all_games', to: 'application#count_all_games', via: :get, action: 'count_all_games' 
+  
   resources :games
 
   resources :sports
 
-  resources :teams do 
-    member do
-      get 'count_all_games'
-    end
-    match '/show_all_games', to: 'teams#show_all_games', via: :get, action: 'show_all_games'
-  end
+  resources :teams 
 
   resources :team_games
 
