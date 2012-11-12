@@ -46,7 +46,7 @@ class UsersController < ApplicationController
     
     respond_to do |format|
      if @user.blank?
-      @user = User.new(name: params["name"], fb_id: params["id"], city: params["city"], initial: name[0])
+      @user = User.new(name: params["name"], fb_id: params["id"], city: params["city"], initial: name[0], sport_id: params["sport_id"])
 
       #respond_to do |format|
         if @user.save
