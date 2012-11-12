@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
   def count_all_games
     @team = Team.find(params["id"])
 
-    @count_games = Game.where("(team1_id = :team_id OR team2_id = :team_id) AND state = :stat", { team_id: params["id"] , stat: "off"}).count
+    @count_games = @team.count_all_games()
 
     respond_to do |format|
       format.json { render json: @count_games }
@@ -45,10 +45,10 @@ class ApplicationController < ActionController::Base
   def team_rating
    @team = Team.find(params["id"])
    
-   @team_game_no =  @team.count_all_games
-   @team_score = @team.count_team_score
+   @team_game_no = @team.count_all_games()
+   @team_score   = @team.count_team_score()
 
-   @team_rating = @team_game_no / @team_score
+   @team_rating  = @team_game_no / @team_score
  
     respond_to do |format|
       format.json {render json: @team_rating}

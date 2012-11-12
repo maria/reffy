@@ -9,4 +9,8 @@ class Team < ActiveRecord::Base
 
   belongs_to :sport
   
+  def count_all_teams
+    Game.where("(team1_id = :team_id OR team2_id = :team_id) AND state = :stat", { team_id: self.id , stat: "off"}).count	
+  end
+
 end
