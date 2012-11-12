@@ -13,4 +13,7 @@ class Team < ActiveRecord::Base
     Game.where("(team1_id = :team_id OR team2_id = :team_id) AND state = :stat", { team_id: self.id , stat: "off"}).count	
   end
 
+  def count_team_score
+  end
+
 end
