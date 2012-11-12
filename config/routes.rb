@@ -9,6 +9,9 @@ TeamX::Application.routes.draw do
   match 'teams/:id/team_rating', to: 'application#team_rating', via: :get, action: 'team_rating' 
  
   match 'statistics/every_game', to: 'statistics#every_team_games', via: :get, action: 'every_team_games' 
+  match 'statistics/every_team_details', to: 'statistics#every_team_details', via: :get, action: 'every_team_details' 
+  
+  match 'games/show_on_games', to: 'games#show_on_games', via: :get, action: 'show_on_games' 
   resources :games
 
   resources :sports

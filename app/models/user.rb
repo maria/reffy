@@ -4,6 +4,6 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :teams, foreign_key: 'user_id'
   has_and_belongs_to_many :sports, foreign_key: 'id'
   
-  has_many :teamplayers
+  has_many :teamplayers, through: :teams
 
 end

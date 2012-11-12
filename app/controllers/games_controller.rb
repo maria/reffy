@@ -93,4 +93,13 @@ class GamesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
+ def show_on_games
+ @all_on_games = Game.where('state = ?', "on")
+
+  respond_to do |format|
+    format.json {render json: @all_on_games}
+  end
+ end
 end
