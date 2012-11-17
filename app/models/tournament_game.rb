@@ -3,5 +3,7 @@ class TournamentGame < ActiveRecord::Base
  
   belongs_to :tournament
   belongs_to :game
+  validates :game_id , :presence =>true
+  validates :team_id, :presence =>true
 
 end
