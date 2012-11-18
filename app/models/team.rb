@@ -1,10 +1,10 @@
 class Team < ActiveRecord::Base
   attr_accessible :captain_id, :name
    
-  has_many :users, through: :teamplayers
+  has_many :users, through: :team_players
  
-  has_many :games1, :class_name => "Game", through: :teamgames, foreign_key: 'team1_id'
-  has_many :games2, :class_name => "Game", through: :teamgames, foreign_key: 'team2_id'
+  has_many :games1, :class_name => "Game", through: :team_games, foreign_key: 'team1_id'
+  has_many :games2, :class_name => "Game", through: :team_games, foreign_key: 'team2_id'
 
   
   def count_all_teams

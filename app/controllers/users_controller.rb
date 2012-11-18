@@ -111,7 +111,7 @@ end
   end
 
 #All the games played by the user.
-def show_all_user_games
+def show_all_games
      @user = User.find_by_fb_id(params["id"])
     
      @all_games = @user.games_played

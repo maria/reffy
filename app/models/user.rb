@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   attr_accessible :city, :initial, :name, :email, :fb_id
   
   #models connection
-  has_many :teams, through: :teamplayers
+  has_many :teams, through: :team_players
   #
   before_save {|user| user.email = email.downcase}
 
@@ -31,7 +31,7 @@ def all_teams
 end
 
 def games_played
-    Game.joins(@all_teams)
+    .joins()
 end
   
 end
