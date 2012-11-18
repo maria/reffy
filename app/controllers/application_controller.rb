@@ -54,35 +54,4 @@ class ApplicationController < ActionController::Base
       format.json {render json: @team_rating}
     end
   end
- 
-  def show_all_user_games
-     @user = User.find(params["id"])
-     @all_games = []
-  
-     @all_team_games = Team.select('game_id').where("user_id = ?", @user.id)
-     
-     @all_team_games.find_each do |game|
-        @all_games += Game.where("id = ?", game)
-    
-     end
-     
-    respond_to do |format|
-      format.json {render json: @all_games}
-    end
-  end
-
-
-private
-
-  def mobile_user_agent?
-    uag         = request.env["HTTP_USER_AGENT"].downcase rescue ""
-    is_mobile   = false
-
-    if uag.index("android") || uag.index("htc") || uag.index("iphone")
-      is_mobile = true
-    end
-
-    @mobile_user_agent ||= ( request.env["HTTP_USER_AGENT"] && is_mobile )
-  end
-
 end

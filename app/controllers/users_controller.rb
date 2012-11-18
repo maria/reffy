@@ -1,13 +1,13 @@
 class UsersController < ApplicationController
-  Koala.http_service.http_options = {:ssl => {:ca_path => "/etc/ssl/certs"}}
-  skip_before_filter  :verify_authenticity_token
+
+#Specific methods
+
   #GET /users
   #GET /users.json
     def index
     @users = User.all
 
     respond_to do |format|
-      format.html # index.html.erb
       format.json { render json: @users }
     end
   end
@@ -15,10 +15,9 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @user = User.find(params["id"])
+    @user = User.find_by_fb_id(params["id"])
 
     respond_to do |format|
-      format.html # show.html.erb
       format.json { render json: @user }
     end
   end
@@ -29,14 +28,13 @@ class UsersController < ApplicationController
     @user = User.new
 
     respond_to do |format|
-      format.html # new.html.erb
       format.json { render json: @user }
     end
   end
 
   # GET /users/1/edit
   def edit
-    @user = User.find(params[:id])
+    @user = User.find_by_fb_id(params[:id])
   end
 
   # POST /users
@@ -46,18 +44,18 @@ class UsersController < ApplicationController
     
     respond_to do |format|
      if @user.blank?
-      @user = User.new(name: params["name"], fb_id: params["id"], city: params["city"], initial: :name[0], sport_id: params["sport_id"])
+      @user = User.new(name: params["name"], initial: :name[0], 
+                       city: params["city"], fb_id: params["id"],
+                      email: params["email"]
+                      )
 
       #respond_to do |format|
         if @user.save
-          format.html { redirect_to @user, notice: 'User was successfully created.' }
           format.json { render json: @user, status: :created, location: @user }
         else
-          format.html { render action: "new" }
           format.json { render json: @user.errors, status: :unprocessable_entity }
       end
       else
-          format.html { redirect_to @user, notice: 'User is created.' }
           format.json { render json: @user, status: :existing, location: @user }
      end
     end
@@ -70,10 +68,8 @@ end
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
@@ -81,35 +77,40 @@ end
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    @user = User.find(params[:id])
+    @user = User.find_by_fb_id(params[:id])
     @user.destroy
 
     respond_to do |format|
-      format.html { redirect_to users_url }
       format.json { head :no_content }
     end
   end
 
- def user_sports
-  @user = User.find(params["id"])
+# Unspecific methods
+
+ #Sports played by the user. We find them by
+ #a join between games played and their 
+ #sport id.
+ def played_sports
+  @user = User.find_by_fb_id(params["id"])
   
-  @user_sports = Sport.where('id = ?', @user.sport_id)
+  @user_sports = @user.show_played_sports
   
     respond_to do |format|
       format.json { render json: @user_sports }
     end
   end
-end
-"
-  def facebook_user
-    @user = User.find_by_fb_id(params["'id'"])
 
-    if @user.blank?
-      rand_password = SecureRandom.hex(8)
-      @user = User.new(:name => params["'name"], :fb_id => params["id'"],
-                        :password => rand_password, :password_confirmation => rand_password)
+#All the games played by the user.
+def show_all_user_games
+     @user = User.find_by_fb_id(params["id"])
+    
+     @all_team_games = @user.games_played
+    
+    respond_to do |format|
+      format.json {render json: @all_games}
     end
   end
-"
+
+end
 
 

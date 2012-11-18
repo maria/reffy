@@ -1,13 +1,11 @@
 class Team < ActiveRecord::Base
-  attr_accessible :captain_id, :name, :sport_id, :user_id, :game_id
+  attr_accessible :captain_id, :name
 
-  has_and_belongs_to_many :users, foreign_key: 'team_id' 
-  has_many :teamplayers, foreign_key: 'team_id'
+  has_and_belongs_to_many :users, through: :teamplayers, foreign_key: 'team_id' 
  
-  has_and_belongs_to_many :games1, :class_name => "Game",  foreign_key: 'team1_id'
-  has_and_belongs_to_many :games2, :class_name => "Game",  foreign_key: 'team2_id'
+  has_and_belongs_to_many :games1, :class_name => "Game", through: :teamgame, foreign_key: 'team1_id'
+  has_and_belongs_to_many :games2, :class_name => "Game", through: :teamgame, foreign_key: 'team2_id'
 
-  belongs_to :sport
   
   def count_all_teams
     Game.where("(team1_id = :team_id OR team2_id = :team_id) AND state = :stat", { team_id: self.id , stat: "off"}).count	
@@ -16,4 +14,8 @@ class Team < ActiveRecord::Base
   def count_team_score
   end
 
+  def games_of_team
+     @games = Game.where('team_id = ?', self.id)
+  end
+    
 end
