@@ -1,7 +1,6 @@
 class Team < ActiveRecord::Base
   attr_accessible :captain_id, :name
    
-  has_many :teamplayers 
   has_many :users, through: :teamplayers, foreign_key: 'team_id' 
  
   has_many :games1, :class_name => "Game", through: :teamgame, foreign_key: 'team1_id'

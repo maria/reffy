@@ -2,10 +2,8 @@ class User < ActiveRecord::Base
   attr_accessible :city, :initial, :name, :email, :fb_id
   
   #models connection
-  has_many :teamplayers
   has_many :teams, through: :teamplayers, foreign_key: 'user_id'
 
-  
   #
   before_save {|user| user.email = email.downcase}
 
