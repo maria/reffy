@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
   def count_all_games
     @team = Team.find(params["id"])
 
-    @count_games = @team.count_all_games()
+    @count_games = @team.count_all_games
 
     respond_to do |format|
       format.json { render json: @count_games }

@@ -23,15 +23,15 @@ class User < ActiveRecord::Base
 	  				presence: true
 
 def show_played_sports
-  Sports.join()
+  #Sports.joins()
 end
 
-def teams
-  Team.joins(:users)
+def all_teams
+  Team.joins('JOIN team_players ON teams.id = team_players.team_id').where('team_players.user_id = ?', self.id)
 end
 
 def games_played
-#   Game.joins('')
+    Game.joins(@all_teams)
 end
   
 end

@@ -90,6 +90,16 @@ end
  #Sports played by the user. We find them by
  #a join between games played and their 
  #sport id.
+ def all_teams
+   @user = User.find_by_fb_id(params["id"])
+   @all = @user.all_teams()
+    
+     respond_to do |format|
+      format.json {render json: @all}
+    end
+ end
+
+ #users sports played along time
  def played_sports
   @user = User.find_by_fb_id(params["id"])
   
@@ -104,7 +114,7 @@ end
 def show_all_user_games
      @user = User.find_by_fb_id(params["id"])
     
-     @all_team_games = @user.games_played
+     @all_games = @user.games_played
     
     respond_to do |format|
       format.json {render json: @all_games}
