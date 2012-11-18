@@ -3,7 +3,7 @@ class Game < ActiveRecord::Base
  
   #model connection with models
   has_many :teams, through: :teamgames
-  belongs_to :tournament, through: :tournamentgame
+  has_one :tournament, through: :tournamentgame
 
   #validate data
   validates :latitude , presence: true
