@@ -3,8 +3,8 @@ class Team < ActiveRecord::Base
    
   has_many :users, through: :teamplayers, foreign_key: 'team_id' 
  
-  has_many :games1, :class_name => "Game", through: :teamgame, foreign_key: 'team1_id'
-  has_many :games2, :class_name => "Game", through: :teamgame, foreign_key: 'team2_id'
+  has_many :games1, :class_name => "Game", through: :teamgames, foreign_key: 'team1_id'
+  has_many :games2, :class_name => "Game", through: :teamgames, foreign_key: 'team2_id'
 
   
   def count_all_teams
