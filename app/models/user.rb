@@ -2,7 +2,9 @@ class User < ActiveRecord::Base
   attr_accessible :city, :initial, :name, :email, :fb_id
   
   #models connection
-  has_and_belongs_to_many :teams, through: :teamplayers, foreign_key: 'user_id'
+  has_many :teamplayers
+  has_many :teams, through: :teamplayers, foreign_key: 'user_id'
+
   
   #
   before_save {|user| user.email = email.downcase}
@@ -28,11 +30,11 @@ def show_played_sports
 end
 
 def teams
-  Team.where("user_id = ?", self.id) 
+  Team.joins(:users)
 end
 
 def games_played
-   Game.
+#   Game.joins('')
 end
   
 end

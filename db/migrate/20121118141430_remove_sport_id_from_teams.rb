@@ -3,5 +3,7 @@ class RemoveSportIdFromTeams < ActiveRecord::Migration
   end
 
   def down
+     remove_column :users, :sport_id
+     remove_column :users, :team_id
   end
 end

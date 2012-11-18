@@ -5,6 +5,7 @@ development:
   enconding: utf8
   pool: 8
   timeout: 5000
+  #comment user and passwd, Maria :) 
   user: root
   password: mysql
 
@@ -13,11 +14,14 @@ development:
 # Do not set this db to the same as development or production.
 test:
   adapter: mysql2
-  database: test_teamx
+  database: testteamx
   host: localhost
   enconding: utf8
   pool: 8
   timeout: 5000
+  #same here :)
+  user: root
+  password: mysql
 
 production:
   adapter: postgresql
