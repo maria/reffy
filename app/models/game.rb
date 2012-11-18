@@ -15,9 +15,7 @@ class Game < ActiveRecord::Base
   validates :scor_team2 , presence: true,
 					 	numericality: { only_integer: true }
 
-  validates :team1_id , presence: true
-  validates :team2_id , presence: true
 
   validates :state, inclusion: { in: %w(on off)}
-  validates :sport_id, presence: true
+
 end

@@ -6,6 +6,5 @@ class Tournament < ActiveRecord::Base
   validates :name , presence: true,
 					length: { maximum: 30}
 
-  validates  :sport_id , presence: true
-					
+ 					
 end
