@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   
   #models connection
   has_many :teams, through: :team_players
+  belongs_to :team, foreign_key: 'captain_id'
   #
   before_save {|user| user.email = email.downcase}
 
@@ -31,7 +32,8 @@ def all_teams
 end
 
 def games_played
-    .joins()
+  @teams = self.all_teams
+  return @teams.all_games_for_teams
 end
   
 end
