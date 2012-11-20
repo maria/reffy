@@ -40,17 +40,31 @@ class GamesController < ApplicationController
   # POST /games
   # POST /games.json
   def create
-    @game = Game.new(params[:game])
+    
+    @team_1 = Team.find_by_name(params["team1_name"])
+    @team_2 = Team.find_by_name(params["team2_name"])
 
-    respond_to do |format|
-      if @game.save
-        format.html { redirect_to @game, notice: 'Game was successfully created.' }
-        format.json { render json: @game, status: :created, location: @game }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @game.errors, status: :unprocessable_entity }
+    @game = Game.new(params[:game], team1_id: @team_1.id, team2_id: @team_2.id)
+    
+    if @team_1 && @team_2
+
+      respond_to do |format|
+        if @game.save
+       
+          format.json { render json: @game, status: :created, location: @game }
+        else
+         
+          format.json { render json: @game.errors, status: :unprocessable_entity }
+        end 
+
+      elsif @team_1.nil?
+          format.json { render json: @game.team1_name, status: :unprocessable_entity }
+
+      elsif @team_2.nil?
+          format.json { render json: @game.team2_name, status: :unprocessable_entity }
       end
     end
+
   end
 
   # PUT /games/1
@@ -61,20 +75,20 @@ class GamesController < ApplicationController
     if @game.state == 'on'
     respond_to do |format|
       if @game.update_attributes(params[:game])
-        format.html { redirect_to @game, notice: 'Game was successfully updated.' }
+    
         format.json { render json: @game }
       else
-        format.html { render action: "edit" }
+
         format.json { render json: @game.errors, status: :unprocessable_entity }
       end
      end
     else
     respond_to do |format|
       if @game.update_attributes(params[:game])
-        format.html { redirect_to @game, notice: 'Game has been closed.' }
+       
         format.json { render json: @game }
       else
-        format.html { render action: "edit" }
+       
         format.json { render json: @game.errors, status: :unprocessable_entity }
       end
      end
