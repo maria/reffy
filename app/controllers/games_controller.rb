@@ -43,24 +43,34 @@ def create
     
   @team_1 = Team.find_by_name(params["team1_name"])
   @team_2 = Team.find_by_name(params["team2_name"])
+  @user = User.find_by_fb_id(params["id"])
 
   @game = Game.new(params[:game], team1_id: @team_1.id, team2_id: @team_2.id)
     
   respond_to do |format|
-    if @team_1 && @team_2
-          if @game.save
-         
-            format.json { render json: @game, status: :created, location: @game }
-          else
-           
-            format.json { render json: @game.errors, status: :unprocessable_entity }
-          end 
-    elsif @team_1.nil?
-            format.json { render json: @game.team1_name, status: :unprocessable_entity }
-    else
-           format.json { render json: @game.team2_name, status: :unprocessable_entity }
+
+    if @team_1.nil?
+          Team.new(name: params["team1_name"], captain_id: @user.id)
+          if not @team.save
+              format.json { render json: @team.errors, status: :unprocessable_entity }
+              break
+          end
+    elsif @team_2.nil?
+          @team = Team.new(name: params["team2_name"], captain_id: @user.id)
+          if not @team.save
+             format.json { render json: @team.errors, status: :unprocessable_entity }
+             break
+          end
+    elsif @team_1 && @team_2
+    
+      if @game.save
+              format.json { render json: @game, status: :created}
+      else      
+              format.json { render json: @game.errors, status: :unprocessable_entity }
+      end 
     end
   end
+
 end
 
   # PUT /games/1
