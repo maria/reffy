@@ -39,33 +39,35 @@ class GamesController < ApplicationController
 
   # POST /games
   # POST /games.json
-  def create
+def create
     
-    @team_1 = Team.find_by_name(params["team1_name"])
-    @team_2 = Team.find_by_name(params["team2_name"])
+  @team_1 = Team.find_by_name(params["team1_name"])
+  @team_2 = Team.find_by_name(params["team2_name"])
 
-    @game = Game.new(params[:game], team1_id: @team_1.id, team2_id: @team_2.id)
+  @game = Game.new(params[:game], team1_id: @team_1.id, team2_id: @team_2.id)
     
-    if @team_1 && @team_2
+  if @team_1 && @team_2
 
-      respond_to do |format|
-        if @game.save
-       
-          format.json { render json: @game, status: :created, location: @game }
-        else
+    respond_to do |format|
+          if @game.save
          
-          format.json { render json: @game.errors, status: :unprocessable_entity }
-        end 
+            format.json { render json: @game, status: :created, location: @game }
+          else
+           
+            format.json { render json: @game.errors, status: :unprocessable_entity }
+          end 
 
-      elsif @team_1.nil?
-          format.json { render json: @game.team1_name, status: :unprocessable_entity }
-
-      elsif @team_2.nil?
-          format.json { render json: @game.team2_name, status: :unprocessable_entity }
+        elsif @team_1.nil?
+            format.json { render json: @game.team1_name, status: :unprocessable_entity }
+        end
+        elsif @team_2.nil?
+            format.json { render json: @game.team2_name, status: :unprocessable_entity }
+        end
       end
     end
-
   end
+
+end
 
   # PUT /games/1
   # PUT /games/1.json
@@ -116,4 +118,5 @@ class GamesController < ApplicationController
     format.json {render json: @all_on_games}
   end
  end
+
 end
