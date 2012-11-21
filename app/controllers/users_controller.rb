@@ -51,12 +51,12 @@ class UsersController < ApplicationController
 
       #respond_to do |format|
         if @user.save
-          format.json { status: :created }
+          format.json { render json: @user, status: :created }
         else
           format.json { render json: @user.errors, status: :unprocessable_entity }
       end
       else
-          format.json { status: :existing }
+          format.json {render json: @user, status: :existing }
      end
     end
 end
