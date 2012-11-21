@@ -12,5 +12,4 @@ For team:
 If you find a issue or you want a fix/chore/bug,
 make an Issue for it, with details.
 
-Maria N.
-
+Heroku link - http://cryptic-tundra-3237.heroku.com/

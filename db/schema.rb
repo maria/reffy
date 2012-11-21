@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(:version => 20121120194858) do
     t.integer  "scor_team1"
     t.integer  "scor_team2"
     t.float    "duration"
-    t.integer  "team1_id"
-    t.integer  "team2_id"
+    t.string   "team1_name"
+    t.string   "team2_name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "state"
@@ -34,6 +34,16 @@ ActiveRecord::Schema.define(:version => 20121120194858) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "team_games", :force => true do |t|
+    t.integer  "team_id"
+    t.integer  "game_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "team1_id"
+    t.integer  "team2_id"
+    t.integer  "sport_id"
+  end
+
   create_table "team_players", :force => true do |t|
     t.integer  "team_id"
     t.integer  "user_id"
@@ -44,11 +54,8 @@ ActiveRecord::Schema.define(:version => 20121120194858) do
   create_table "teams", :force => true do |t|
     t.string   "name"
     t.integer  "captain_id"
-    t.integer  "sport_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.integer  "user_id"
-    t.integer  "game_id"
   end
 
   create_table "tournament_games", :force => true do |t|
@@ -74,8 +81,6 @@ ActiveRecord::Schema.define(:version => 20121120194858) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "fb_id"
-    t.integer  "team_id"
-    t.integer  "sport_id"
   end
 
 end
