@@ -44,15 +44,15 @@ def create
   @team_1 = Team.find_by_name(params[:game]["team1_name"])
   @team_2 = Team.find_by_name(params[:game]["team2_name"])
 
-  #@user = User.find_by_fb_id(params["user_id"])
+  @user = User.find_by_fb_id(params["user_id"])
   
   respond_to do |format|
 
     if @team_1.nil?
-          team1 = Team.new(name: params[:game]["team1_name"], captain_id: 1)
+          team1 = Team.new(name: params[:game]["team1_name"], captain_id: @user.id)
         
     elsif @team_2.nil?
-          @team_2 = Team.new(name: params[:game]["team2_name"], captain_id: 1)          
+          @team_2 = Team.new(name: params[:game]["team2_name"], captain_id: @user.id)          
     end
   
     if @team_1 && @team_2
