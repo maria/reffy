@@ -46,17 +46,17 @@ class UsersController < ApplicationController
      if @user.blank?
       @user = User.new(name: params["name"], initial: :name[0], 
                        city: params["city"], fb_id: params["id"],
-                      email: params["email"]
+                       email: params["email"]
                       )
 
       #respond_to do |format|
         if @user.save
-          format.json { render json: @user, status: :created, location: @user }
+          format.json { status: :created }
         else
           format.json { render json: @user.errors, status: :unprocessable_entity }
       end
       else
-          format.json { render json: @user, status: :existing, location: @user }
+          format.json { status: :existing }
      end
     end
 end
