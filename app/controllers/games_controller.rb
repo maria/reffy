@@ -44,12 +44,12 @@ def create
   @team_1 = Team.find_by_name(params[:game]["team1_name"])
   @team_2 = Team.find_by_name(params[:game]["team2_name"])
 
-  @user = User.find_by_fb_id(params[:game]["user_id"])
+  @user = User.find_by_fb_id(params["user_id"])
     
   respond_to do |format|
 
     if @team_1.nil?
-          team1 = Team.new(name: params["team1_name"], captain_id: @user.id)
+          team1 = Team.new(name: params["team1_name"], captain_id: )
           if not @team_1.save
               format.json { render json: @team.errors, status: :unprocessable_entity }
               break
@@ -61,7 +61,7 @@ def create
              break
           end
     end
-
+  
     if @team_1 && @team_2
 
         @game = Game.new(duration: params[:game][:duration],
