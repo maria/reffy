@@ -69,10 +69,11 @@ User.create(name:'Jhon Doe 52',city:'Bucuresti',fb_id:'jhon-doe52')
 User.create(name:'Jhon Doe 53',city:'Bucuresti',fb_id:'jhon-doe53')
 User.create(name:'Jhon Doe 54',city:'Bucuresti',fb_id:'jhon-doe54')
 User.create(name:'Jhon Doe 55',city:'Bucuresti',fb_id:'jhon-doe55')
+User.create(name: 'Jhon Doe 56', city: 'Bucuresti', fb_id: 'jhon-doe56')
 
 Tournament.create(name:'Football Masters',data: DateTime.new(2012,11,20),sport_id:1)
 Tournament.create(name:'Play Day',data:DateTime.new(2012,11,30),sport_id:3)
-Tournament.create(name:'The CUP',data: DateTime.new(2012,11,31),sport_id:2)
+Tournament.create(name:'The CUP',data: DateTime.new(2012,11,29),sport_id:2)
 Tournament.create(name:'Play & Win',data:DateTime.new(2012,12,7),sport_id:4)
 Tournament.create(name:'The Football Stars',data:DateTime.new(2012,11,13),sport_id:1)
 Tournament.create(name:'Winner`s Race',data:DateTime.new(2012,1,9),sport_id:5)
@@ -90,7 +91,20 @@ Team.create(name:'Team8',captain_id:8)
 Team.create(name:'Team9',captain_id:9)
 Team.create(name:'Team10',captain_id:10)
 Team.create(name:'Team11',captain_id:11)
+
 Team.create(name:'Team12',captain_id:12)
+
+
+Game.create(latitude:"44.437711",longitude:"26.097367",scor_team1:1,scor_team2:0,duration:45,team1_name:'1',team2_name:'2',state:"on",sport_id:1)
+Game.create(latitude:"44.431711",longitude:"26.087367",scor_team1:3,scor_team2:2,duration:90,team1_name:'3',team2_name:'4',state:"on",sport_id:1)
+Game.create(latitude:"44.435311",longitude:"26.097367",scor_team1:2,scor_team2:2,duration:92,team1_name:'5',team2_name:'6',state:"off",sport_id:1)
+Game.create(latitude:"44.432001",longitude:"26.086367",scor_team1:1,scor_team2:2,duration:76,team1_name:'7',team2_name:'8',state:"on",sport_id:1)
+Game.create(latitude:"44.432311",longitude:"26.084367",scor_team1:0,scor_team2:3,duration:91,team1_name:'9',team2_name:'10',state:"off",sport_id:1)
+Game.create(latitude:"44.435011",longitude:"26.107367",scor_team1:8,scor_team2:10,duration:20,team1_name:'17',team2_name:'18',state:"on",sport_id:6)
+Game.create(latitude:"44.433511",longitude:"26.086267",scor_team1:12,scor_team2:18,duration:55,team1_name:'19',team2_name:'20',state:"on",sport_id:6)
+Game.create(latitude:"44.435511",longitude:"26.102328",scor_team1:35,scor_team2:45,duration:45,team1_name:'21',team2_name:'22',state:"on",sport_id:7)
+Game.create(latitude:"44.434511",longitude:"26.102228",scor_team1:20,scor_team2:23,duration:30,team1_name:'15',team2_name:'16',state:"on",sport_id:5)
+Game.create(latitude:"44.435211",longitude:"26.102528",scor_team1:2,scor_team2:2,duration:78,team1_name:'25',team2_name:'26',state:"on",sport_id:1)
 
 
 Game.create(latitude:"44.437711",longitude:"26.097367",scor_team1:1,scor_team2:0,duration:45,team1_name:"team1",team2_name:"team2",state:"on",sport_id:1)
