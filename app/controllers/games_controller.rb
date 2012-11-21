@@ -60,17 +60,18 @@ def create
              format.json { render json: @team.errors, status: :unprocessable_entity }
              break
           end
-    elsif @team_1 && @team_2
-
-      @game = Game.new(params[:game], team1_id: @team_1.id, team2_id: @team_2.id)    
-      if @game.save
-              format.json { render json: @game, status: :created}
-      else      
-              format.json { render json: @game.errors, status: :unprocessable_entity }
-      end 
     end
-  end
 
+    if @team_1 && @team_2
+
+        @game = Game.new(params[:game], team1_id: @team_1.id, team2_id: @team_2.id)    
+      
+        if @game.save
+                format.json { render json: @game, status: :created}
+        else      
+                format.json { render json: @game.errors, status: :unprocessable_entity }
+    end 
+  end
 end
 
   # PUT /games/1
