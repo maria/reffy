@@ -49,7 +49,7 @@ def create
   respond_to do |format|
 
     if @team_1.nil?
-          team1 = Team.new(name: params["team1_name"], captain_id: )
+          team1 = Team.new(name: params["team1_name"], captain_id: @user.id)
           if not @team_1.save
               format.json { render json: @team.errors, status: :unprocessable_entity }
               break
