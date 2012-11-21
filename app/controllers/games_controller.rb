@@ -70,7 +70,8 @@ def create
                 format.json { render json: @game, status: :created}
         else      
                 format.json { render json: @game.errors, status: :unprocessable_entity }
-    end 
+        end 
+    end
   end
 end
 
