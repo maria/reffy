@@ -43,8 +43,8 @@ def create
     
   @team_1 = Team.find_by_name(params["team1_name"])
   @team_2 = Team.find_by_name(params["team2_name"])
-  
-  @user = User.find_by_fb_id(params["id"])
+
+  @user = User.find_by_fb_id(params["user_id"])
 
   @game = Game.new(params[:game], team1_id: @team_1.id, team2_id: @team_2.id)
     
