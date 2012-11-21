@@ -41,22 +41,22 @@ class GamesController < ApplicationController
   # POST /games.json
 def create
     
-  @team_1 = Team.find_by_name(params["team1_name"])
-  @team_2 = Team.find_by_name(params["team2_name"])
+  @team_1 = Team.find_by_name(params[:game]["team1_name"])
+  @team_2 = Team.find_by_name(params[:game]["team2_name"])
 
-  @user = User.find_by_fb_id(params["user_id"])
+  @user = User.find_by_fb_id(params[:game]["user_id"])
     
   respond_to do |format|
 
     if @team_1.nil?
-          Team.new(name: params["team1_name"], captain_id: @user.id)
-          if not @team.save
+          team1 = Team.new(name: params["team1_name"], captain_id: @user.id)
+          if not @team_1.save
               format.json { render json: @team.errors, status: :unprocessable_entity }
               break
           end
     elsif @team_2.nil?
-          @team = Team.new(name: params["team2_name"], captain_id: @user.id)
-          if not @team.save
+          @team_2 = Team.new(name: params["team2_name"], captain_id: @user.id)
+          if not @team_2.save
              format.json { render json: @team.errors, status: :unprocessable_entity }
              break
           end
@@ -64,7 +64,11 @@ def create
 
     if @team_1 && @team_2
 
-        @game = Game.new(params[:game], team1_id: @team_1.id, team2_id: @team_2.id)    
+        @game = Game.new(duration: params[:game][:duration],
+                        latitude: params[:game][:latitude], longitude: params[:game][:longitude],
+                        scor_team1: params[:game][:scor_team1], scor_team2: params[:game][:scor_team2], 
+                        state: params[:game][:state], sport_id: params[:game][:sport_id],
+                        team1_id: @team_1.id, team2_id: @team_2.id)    
       
         if @game.save
                 format.json { render json: @game, status: :created}
