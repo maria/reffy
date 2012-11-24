@@ -60,7 +60,7 @@ def create
 
     params[:game][:team1_id] = @team_1.id
     params[:game][:team2_id] = @team_2.id
-    params[:game] = params[:game].except([:user_id])
+    params[:game] = params[:game].remove([:user_id])
 
     print params[:game]
    
