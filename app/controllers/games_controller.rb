@@ -50,10 +50,12 @@ def create
 
     if @team_1.nil?
           @team_1 = Team.new(name: params[:game][:team1_id], captain_id: @user.id)
+          @team_1.save
     end  
 
     if @team_2.nil?
-          @team_2 = Team.new(name: params[:game][:team2_id], captain_id: @user.id)          
+          @team_2 = Team.new(name: params[:game][:team2_id], captain_id: @user.id)     
+          @team_2.save     
     end
 
     params[:game][:team1_id] = @team_1.id
