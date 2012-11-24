@@ -43,8 +43,8 @@ def create
     
   @team_1 = Team.find_by_name(params[:game][:team1_id])
   @team_2 = Team.find_by_name(params[:game][:team2_id])
-  
-  @user = User.find(params[:game][:user_id])
+
+  @user = User.find_by_fb_id(params[:game][:user_id])
 
   respond_to do |format|
 
