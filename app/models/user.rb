@@ -8,14 +8,13 @@ class User < ActiveRecord::Base
   before_save {|user| user.email = email.downcase}
 
   #model validations
-  EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  #EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
   validates :name, :presence => true,
 				    length: { :maximum => 50,
 					         	  :minimum => 3}
 
   validates :email,
-					 format: { with: EMAIL_REGEX},
 					 uniqueness: { case_sensitive: false}
 
   validates :city, length: { maximum: 30}
