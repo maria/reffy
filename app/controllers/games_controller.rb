@@ -60,7 +60,7 @@ def create
 
     params[:game][:team1_id] = @team_1.id
     params[:game][:team2_id] = @team_2.id
-    params[:game] = params[:game].remove([:user_id])
+    params[:game] = params[:game].delete([:user_id])
 
     print params[:game]
    
@@ -117,7 +117,6 @@ end
     @game.destroy
 
     respond_to do |format|
-      format.html { redirect_to games_url }
       format.json { head :no_content }
     end
   end
