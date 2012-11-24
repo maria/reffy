@@ -43,9 +43,11 @@ class TeamPlayersController < ApplicationController
 
     @team = Team.find_by_name(params[:team_player][:team_id])
 
-    params[:team_player][:users].all.each do |userel|
 
-      params[:team_player][:users] = userel  
+#I thins it should be an array for
+  
+    params[:team_player][:users].each do |userel|
+     
       @user = User.find_by_fb_id(userel.id)
 
       if @user.nil?

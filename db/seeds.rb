@@ -14,7 +14,7 @@ Sport.create(name: 'Sport 5')
 Sport.create(name: 'Sport 6')
 Sport.create(name: 'Sport 7')
 
-User.create(name:'Jhon Doe 1',city:'Bucuresti',fb_id:'jhon-doe1',email: :fb_id)
+User.create(name:'Jhon Doe 1',city:'Bucuresti',fb_id:'jhon-doe1',email: 'jhon-doe1')
 User.create(name:'Jhon Doe 2',city:'Bucuresti',fb_id:'jhon-doe2',email: :fb_id)
 User.create(name:'Jhon Doe 3',city:'Iasi',fb_id:'jhon-doe3',email: :fb_id)
 User.create(name:'Jhon Doe 4',city:'Ploiesti',fb_id:'jhon-doe4',email: :fb_id)
