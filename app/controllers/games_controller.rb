@@ -41,27 +41,34 @@ class GamesController < ApplicationController
   # POST /games.json
 def create
     
-  @team_1 = Team.find_by_name(params[:game]["team1_name"])
-  @team_2 = Team.find_by_name(params[:game]["team2_name"])
-
-  @user = User.find_by_fb_id(params["user_id"])
+  @team_1 = Team.find_by_name(params[:game][:team1_id])
+  @team_2 = Team.find_by_name(params[:game][:team2_id])
   
+  @user = User.find(params[:game][:user_id])
+
   respond_to do |format|
 
     if @team_1.nil?
-          @team_1 = Team.new(name: params[:game]["team1_name"], captain_id: @user.id)
+          @team_1 = Team.new(name: params[:game][:team1_id], captain_id: @user.id)
     end  
 
     if @team_2.nil?
-          @team_2 = Team.new(name: params[:game]["team2_name"], captain_id: @user.id)          
+          @team_2 = Team.new(name: params[:game][:team2_id], captain_id: @user.id)          
     end
-  
-    if @team_1 && @team_2
 
-        @game = Game.new(duration: 0, scor_team1: 0, scor_team2: 0,
-           team1_id: @team_1.id, team2_id: @team_2.id,
-           longitude: params[:game][:longitude], latitude: params[:game][:longitude],
-           state: "on", sport_id: params[:game][:sport_id])    
+    params[:game][:team1_id] = @team_1.id
+    params[:game][:team2_id] = @team_2.id
+
+
+    params[:game] = params[:game].except([:user_id])
+
+    if @team_1 && @team_2
+      @game = Game.new(params[:game])
+
+#        @game = Game.new(duration: params[:game][:duration], scor_team1: 0, scor_team2: 0,
+ #          team1_id: @team_1.id, team2_id: @team_2.id,
+  #         longitude: params[:game][:longitude], latitude: params[:game][:longitude],
+   #        state: "on", sport_id: params[:game][:sport_id])    
       
         if @game.save
                 format.json { render json: @game, status: :created}

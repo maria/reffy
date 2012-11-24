@@ -95,7 +95,7 @@ Team.create(name:'Team11',captain_id:11)
 Team.create(name:'Team12',captain_id:12)
 
 
-Game.create(latitude:"44.437711",longitude:"26.097367",scor_team1:1,scor_team2:0,duration:45,team1_name:'Team12',team2_name:'Team2',state:"on",sport_id:1)
+Game.create(latitude:"44.437711",longitude:"26.097367",scor_team1:1,scor_team2:0,duration:45,team1_id:'Team12',team2_id:'Team2',state:"on",sport_id:1)
 
 Tournament_game.create(tournament_id:1,game_id:1)
 Tournament_game.create(tournament_id:1,game_id:2)
