@@ -41,14 +41,14 @@ class TeamPlayersController < ApplicationController
   # POST /team_players.json
   def create
 
-    @team = Team.find_by_name(params[:team_id])
+    @team = Team.find_by_name(params["team_id"])
 
 
 #I thins it should be an array for
   
-    params[:users].each do |userel|
+    params["users"].each do |userel|
 
-      @user = User.find_by_fb_id(userel[:id])
+      @user = User.find_by_fb_id(userel["id"])
 
       if @user.nil?
           @user  = User.new(userel)
