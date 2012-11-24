@@ -14,9 +14,6 @@ class User < ActiveRecord::Base
 				    length: { :maximum => 50,
 					         	  :minimum => 3}
 
-  validates :email,
-					 uniqueness: { case_sensitive: false}
-
   validates :city, length: { maximum: 30}
 
   validates :fb_id, uniqueness: true,
