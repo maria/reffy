@@ -43,9 +43,9 @@ class UsersController < ApplicationController
     @user = User.find_by_fb_id(params["id"])
     
   respond_to do |format|
-    
+
     if @user.nil?
-      @user = User.new(name: params["name"], initial: :name[0], 
+      @user = User.new(name: params["name"], initial: params[:name][0], 
                        city: params["city"], fb_id: params["id"],
                        email: params["email"])
         if @user.save
@@ -54,7 +54,7 @@ class UsersController < ApplicationController
           format.json { render json: @user.errors, status: :unprocessable_entity }
        end
     else
-          format.json {render json: @user, status: :existing }
+          format.json {render json: @user }
     end
   end
 end

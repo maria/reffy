@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :city, :initial, :name, :email, :fb_id
+  attr_accessible :city, :initial, :name, :email, :fb_id, :id
   
   #models connection
   has_many :teams, through: :team_players
