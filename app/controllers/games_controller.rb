@@ -49,15 +49,18 @@ def create
   respond_to do |format|
 
     if @team_1.nil?
-          team1 = Team.new(name: params[:game]["team1_name"], captain_id: @user.id)
-        
-    elsif @team_2.nil?
+          @team_1 = Team.new(name: params[:game]["team1_name"], captain_id: @user.id)
+    end    
+    if @team_2.nil?
           @team_2 = Team.new(name: params[:game]["team2_name"], captain_id: @user.id)          
     end
   
     if @team_1 && @team_2
 
-        @game = Game.new(params[:game])    
+        @game = Game.new(duration: 0, scor_team1: 0, scor_team2: 0,
+           team1_id: @team_1.id, team2_id: @team_2.id,
+           longitude: params[:game][:longitude], latitude: params[:game][:longitude],
+           state: "on", sport_id: params[:game][:sport_id])    
       
         if @game.save
                 format.json { render json: @game, status: :created}
@@ -95,7 +98,9 @@ end
      end
     end
    
-  end
+  end@team_1 = Team.find_by_name(params[:game]["team1_name"])
+  @team_2 = Team.find_by_name(params[:game]["team2_name"])
+
 
   # DELETE /games/1
   # DELETE /games/1.json

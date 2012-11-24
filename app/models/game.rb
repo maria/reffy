@@ -1,5 +1,5 @@
 class Game < ActiveRecord::Base
-  attr_accessible :duration, :latitude, :longitude, :scor_team1, :scor_team2, :state, :team1_name, :team2_name, :sport_id
+  attr_accessible :duration, :latitude, :longitude, :scor_team1, :scor_team2, :state, :team1_id, :team2_id, :sport_id
  
   #model connection with models
   belongs_to :teams

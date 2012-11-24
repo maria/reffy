@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(:version => 20121120194858) do
     t.integer  "scor_team1"
     t.integer  "scor_team2"
     t.float    "duration"
-    t.string   "team1_name"
-    t.string   "team2_name"
+    t.integer   "team1_id"
+    t.integer   "team2_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "state"
