@@ -44,10 +44,10 @@ class TeamPlayersController < ApplicationController
 
     respond_to do |format|
       if @team_player.save
-        format.html { redirect_to @team_player, notice: 'Team player was successfully created.' }
+        
         format.json { render json: @team_player, status: :created, location: @team_player }
       else
-        format.html { render action: "new" }
+
         format.json { render json: @team_player.errors, status: :unprocessable_entity }
       end
     end

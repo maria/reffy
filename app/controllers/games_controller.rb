@@ -46,6 +46,8 @@ def create
 
   @user = User.find_by_fb_id(params[:game][:user_id])
 
+  print @user.id
+
   respond_to do |format|
 
     if @team_1.nil?
@@ -64,21 +66,14 @@ def create
     params[:game].delete :user_id
 
     print params[:game]
-   
-    if @team_1 && @team_2
-      @game = Game.new(params[:game])
 
-#        @game = Game.new(duration: params[:game][:duration], scor_team1: 0, scor_team2: 0,
- #          team1_id: @team_1.id, team2_id: @team_2.id,
-  #         longitude: params[:game][:longitude], latitude: params[:game][:longitude],
-   #        state: "on", sport_id: params[:game][:sport_id])    
+    @game = Game.new(params[:game])
       
         if @game.save
                 format.json { render json: @game, status: :created}
         else      
-                format.json { render json: @game.errors, status: :unprocessable_entity }
+                format.json { render json: @game.errors }
         end 
-    end
   end
 end
 
