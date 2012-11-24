@@ -50,7 +50,8 @@ def create
 
     if @team_1.nil?
           @team_1 = Team.new(name: params[:game]["team1_name"], captain_id: @user.id)
-    end    
+    end  
+
     if @team_2.nil?
           @team_2 = Team.new(name: params[:game]["team2_name"], captain_id: @user.id)          
     end
@@ -85,7 +86,7 @@ end
 
         format.json { render json: @game.errors, status: :unprocessable_entity }
       end
-     end
+    end
     else
     respond_to do |format|
       if @game.update_attributes(params[:game])
@@ -98,9 +99,7 @@ end
      end
     end
    
-  end@team_1 = Team.find_by_name(params[:game]["team1_name"])
-  @team_2 = Team.find_by_name(params[:game]["team2_name"])
-
+  end
 
   # DELETE /games/1
   # DELETE /games/1.json
