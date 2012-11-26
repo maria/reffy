@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121120194858) do
+ActiveRecord::Schema.define(:version => 20121126173927) do
 
   create_table "games", :force => true do |t|
     t.float    "latitude"
@@ -19,12 +19,13 @@ ActiveRecord::Schema.define(:version => 20121120194858) do
     t.integer  "scor_team1"
     t.integer  "scor_team2"
     t.float    "duration"
-    t.integer   "team1_id"
-    t.integer   "team2_id"
+    t.integer  "team1_id"
+    t.integer  "team2_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "state"
     t.integer  "sport_id"
+    t.boolean  "privacy"
   end
 
   create_table "sports", :force => true do |t|
@@ -56,6 +57,7 @@ ActiveRecord::Schema.define(:version => 20121120194858) do
     t.integer  "captain_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.boolean  "open"
   end
 
   create_table "tournament_games", :force => true do |t|
