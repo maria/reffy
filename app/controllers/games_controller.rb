@@ -14,7 +14,7 @@ class GamesController < ApplicationController
   # GET /games/1.json
   def show
     @game = Game.find(params[:id])
-    
+
     @game.team1_id = Team.find(@game.team1_id).select(:name)
     @game.team2_id = Team.find(@game.team2_id).select(:name)
 
@@ -128,8 +128,7 @@ end
     format.json {render json: @all_on_games}
     end
   end
- end
-
+  
  def teams_for_game
  @game = Game.find(params[:id])
 
@@ -140,7 +139,6 @@ end
  end
 
  def game_players
-
- end
+end
 
 end
