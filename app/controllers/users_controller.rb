@@ -42,21 +42,23 @@ class UsersController < ApplicationController
   def create
     @user = User.find_by_fb_id(params["id"])
     
-  respond_to do |format|
-
-    if @user.nil?
-      @user = User.new(name: params["name"], initial: params[:name][0], 
+    respond_to do |format|
+     if @user.blank?
+      @user = User.new(name: params["name"], initial: :name[0], 
                        city: params["city"], fb_id: params["id"],
-                       email: params["email"])
+                      email: params["email"]
+                      )
+
+      #respond_to do |format|
         if @user.save
-          format.json { render json: @user, status: :created }
+          format.json { render json: @user, status: :created, location: @user }
         else
           format.json { render json: @user.errors, status: :unprocessable_entity }
-       end
-    else
-          format.json {render json: @user }
+      end
+      else
+          format.json { render json: @user, status: :existing, location: @user }
+     end
     end
-  end
 end
 
   # PUT /users/1
