@@ -7,14 +7,14 @@ class Team < ActiveRecord::Base
   has_many :games2, :class_name => "Game", foreign_key: 'team2_id'
   
   def count_all_teams
-    Game.where("(team1_id = :team_id OR team2_id = :team_id) AND state = :stat", { team_id: self.id , stat: "off"}).count	
+    Game.joins('JOIN teams ON (games.team1_id = teams.id OR games.team2_id = teams.id)').where("(team1_id = :id OR team2_id = :id) AND state = :stat",{id: self.id, stat:"off"}).count	
   end
 
   def count_team_score
   end
 
   def games_of_team
-     @games = Game.where('team_id = ?', self.id)
+     @games = Game.joins(:teams).where('team1_id = ? OR team2_id = ?', self.id)
   end
     
 end
