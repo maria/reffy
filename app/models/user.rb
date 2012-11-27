@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
 	  				presence: true
 
 def show_played_sports
-  #Sports.joins()
+  User.joins('JOIN user_games ON user_games.user_id = users.id').joins('JOIN games ON games.id = user_games.game_id').joins('JOIN sports ON sports.id=games.sport_id').where('users.id=?',self.id).select('distinct sports.name')
 end
 
 def all_teams
