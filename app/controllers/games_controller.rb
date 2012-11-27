@@ -14,8 +14,10 @@ class GamesController < ApplicationController
   # GET /games/1.json
   def show
     @game = Game.find(params[:id])
+    
     @game.team1_id = Team.find(@game.team1_id).select(:name)
     @game.team2_id = Team.find(@game.team2_id).select(:name)
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @game }
@@ -122,10 +124,8 @@ end
  def show_on_games
   @all_on_games = Game.where("state = 'on'")
 
-
   respond_to do |format|
-  @all_on_games.all.each do |game|
-    format.json {render json: =>  @all_on_games.to_json({:methods => [:get_team1_name, :get_team2_name]})}
+    format.json {render json: @all_on_games}
     end
   end
  end
