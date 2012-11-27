@@ -8,6 +8,7 @@ class UsersController < ApplicationController
     @users = User.all
 
     respond_to do |format|
+      format.html
       format.json { render json: @users }
     end
   end
@@ -15,9 +16,10 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @user = User.find_by_fb_id(params["id"])
+    @user = User.find(params["id"])
 
     respond_to do |format|
+      format.html
       format.json { render json: @user }
     end
   end
@@ -28,13 +30,14 @@ class UsersController < ApplicationController
     @user = User.new
 
     respond_to do |format|
+      format.html
       format.json { render json: @user }
     end
   end
 
   # GET /users/1/edit
   def edit
-    @user = User.find_by_fb_id(params[:id])
+    @user = User.find(params[:id])
   end
 
   # POST /users
