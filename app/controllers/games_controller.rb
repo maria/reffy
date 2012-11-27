@@ -121,11 +121,12 @@ end
 
  def show_on_games
   @all_on_games = Game.where("state = 'on'")
-  @all_on_games = @all_on_games.joins('JOIN teams ON teams.id = games.team1_id').select('teams.name')
 
 
   respond_to do |format|
-    format.json {render json: @all_on_games}
+  @all_on_games.all.each do |game|
+    format.json {render json: =>  @all_on_games.to_json({:methods => [:get_team1_name, :get_team2_name]})}
+    end
   end
  end
 
