@@ -23,4 +23,10 @@ class Game < ActiveRecord::Base
  def show_teams
     Team.select('teams.name').where('teams.id = :id1 OR teams.id = :id2', id1: self.team1_id,  id2: self.team2_id)
  end
+ def get_team1_name
+ 	Team.joins('JOIN games ON games.team1_id = teams.id').where('games.id=?',self.id).select('teams.name')
+ end
+ def get_team2_name
+ 	Team.joins('JOIN games ON games.team2_id = teams.id').where('games.id=?',self.id).select('teams.name')
+ end
 end
