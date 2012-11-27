@@ -28,9 +28,4 @@ class Team < ActiveRecord::Base
         end
     return @team_score
   end
-
-  def games_of_team
-     Game.joins(:teams).where('team1_id = ? OR team2_id = ?', self.id)
-  end
-    
 end
