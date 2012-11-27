@@ -88,8 +88,41 @@ class TeamsController < ApplicationController
       format.json { render json: @count_games }
     end
   end
+
+  def show_all_games
+    @team = Team.find(params["id"])
+
+    @all_games = @team.show_all_games
+
+    respond_to do |format|
+      format.json { render json: @all_games }
+    end
+end
  
-  
+
+ def count_team_score
+     @team = Team.find(params["id"])
+     @team_score = @team.count_team_score
+   
+    respond_to do |format|
+      format.json { render json: @team_score }
+    end
+  end
+ 
+  def team_rating
+   @team = Team.find(params["id"])
+   @team_rating = 0
+   
+   @team_game_no = @team.count_all_games
+   @team_score   = @team.count_team_score
+
+   @team_rating  = @team_game_no / @team_score
+ 
+    respond_to do |format|
+      format.json {render json: @team_rating}
+    end
+  end
+
 end
 
 
