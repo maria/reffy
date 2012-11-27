@@ -29,7 +29,7 @@ end
 
 def games_played
   @teams = self.all_teams
-  return @teams.all_games_for_teams
+  return @teams
 end
   
 end
