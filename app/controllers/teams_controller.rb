@@ -127,7 +127,8 @@ end
     @members = @team.get_team_members
     respond_to do |format|
       format.json {render json: @members}
-  end
+    end
+end
 
 end
 
