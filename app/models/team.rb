@@ -28,4 +28,8 @@ class Team < ActiveRecord::Base
         end
     return @team_score
   end
+  
+  def get_team_members
+    User.joins('JOIN team_players ON team_players.user_id=user.id').joins('JOIN teams ON teams.id = team_players.id').where('teams.id=?',self.id).select('users.id,users.name')
+  end
 end
