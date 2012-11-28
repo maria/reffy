@@ -10,7 +10,7 @@ TeamX::Application.routes.draw do
   match 'teams/:id/count_all_games', to: 'teams#count_all_games', via: :get, action: 'count_all_games' 
   match 'teams/:id/team_score', to: 'teams#count_team_score', via: :get, action: 'count_team_score' 
   match 'teams/:id/team_rating', to: 'teams#team_rating', via: :get, action: 'team_rating' 
-  match 'teams/:id/team_members', to: 'teams#get_team_members', via :get, action: 'get_team_members'
+  match 'teams/:id/team_members', to: 'teams#get_team_members', via: :get, action: 'get_team_members'
  
   match 'statistics/every_game', to: 'statistics#every_team_games', via: :get, action: 'every_team_games' 
   match 'statistics/every_team_details', to: 'statistics#every_team_details', via: :get, action: 'every_team_details' 
