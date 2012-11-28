@@ -122,13 +122,15 @@ end
       format.json {render json: @team_rating}
     end
   end
+
   def get_team_members
     @team = Team.find(params["id"])
     @members = @team.get_team_members
+
     respond_to do |format|
       format.json {render json: @members}
     end
-end
+  end
 
 end
 
