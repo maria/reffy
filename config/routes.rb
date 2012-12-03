@@ -1,6 +1,5 @@
 TeamX::Application.routes.draw do
   
-  resources :user_games
 
   match 'users/:id/show_all_games', to: 'users#show_all_games', via: :get, action: 'show_all_games'
   match 'users/:id/played_sports', to: 'users#played_sports', via: :get, action: 'played_sports'
@@ -34,5 +33,6 @@ TeamX::Application.routes.draw do
 
   resources :users
   
+  resources :user_games
   
 end

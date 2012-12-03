@@ -2,6 +2,7 @@
 
 <table>
   <tr>
+    <th>User</th>
     <th>Team</th>
     <th>Game</th>
     <th></th>
@@ -11,6 +12,7 @@
 
 <% @team_games.each do |team_game| %>
   <tr>
+    <td><%= team_game.user_id %></td>
     <td><%= team_game.team_id %></td>
     <td><%= team_game.game_id %></td>
     <td><%= link_to 'Show', team_game %></td>
