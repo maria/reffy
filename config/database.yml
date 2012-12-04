@@ -6,8 +6,8 @@ development:
   pool: 8
   timeout: 5000
   #comment user and passwd, Maria :) 
- # user: root
-  #password: mysql
+  user: root
+  password: mysql
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -20,8 +20,8 @@ test:
   pool: 8
   timeout: 5000
   #same here :)
-  #user: root
-  #password: mysql
+  user: root
+  password: mysql
 
 production:
   adapter: postgresql
