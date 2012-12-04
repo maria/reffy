@@ -44,6 +44,8 @@ class GamesController < ApplicationController
   # POST /games.json
 def create
     
+  print params[:game]
+    
   @team_1 = Team.find_by_name(params[:game][:team1_id])
   @team_2 = Team.find_by_name(params[:game][:team2_id])
 
@@ -65,8 +67,6 @@ def create
     params[:game][:team2_id] = @team_2.id
 
     params[:game].delete :user_id
-
-    print params[:game]
 
     @game = Game.new(params[:game])
       
