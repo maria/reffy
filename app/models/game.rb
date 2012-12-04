@@ -1,8 +1,10 @@
 class Game < ActiveRecord::Base
   attr_accessible :duration, :latitude, :longitude, :scor_team1, :scor_team2, :state, :team1_id, :team2_id, :sport_id, :user_id, :start_date
   #model connection with models
-  belongs_to :team
+ 
   has_one :tournament, through: :tournament_game
+  has_many :players, class_name: "User", through: :team_games, foreign_key: 'game_id'
+  belongs_to :team
 
   #validate data
   validates :latitude , presence: true

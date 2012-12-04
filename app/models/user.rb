@@ -3,8 +3,9 @@ class User < ActiveRecord::Base
   
   #models connection
   has_many :teams, through: :team_players
+  has_many :played_games, class_name: "Game", through: :team_games, foreign_key: 'user_id'
   belongs_to :team, foreign_key: 'captain_id'
-  #
+  
   before_save {|user| user.email = email.downcase}
 
   #model validations
