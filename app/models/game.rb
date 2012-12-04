@@ -4,6 +4,8 @@ class Game < ActiveRecord::Base
   belongs_to :team
   has_one :tournament, through: :tournament_game
 
+  has_many :players, class_name: "User", through: :team_games, foreign_key: 'game_id'
+
   #validate data
   validates :latitude , presence: true
   validates :longitude , presence: true
