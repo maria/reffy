@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121203205006) do
+ActiveRecord::Schema.define(:version => 20121204160016) do
 
   create_table "games", :force => true do |t|
     t.float    "latitude"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(:version => 20121203205006) do
     t.string   "state"
     t.integer  "sport_id"
     t.boolean  "privacy"
+    t.datetime "start_date"
   end
 
   create_table "sports", :force => true do |t|
