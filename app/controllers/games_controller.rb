@@ -49,8 +49,6 @@ def create
 
   @user = User.find_by_fb_id(params[:game][:user_id])
 
-  print @user.id
-
   respond_to do |format|
 
     if @team_1.nil?
