@@ -44,8 +44,6 @@ class GamesController < ApplicationController
   # POST /games.json
 def create
     
-  print params[:game]
-    
   @team_1 = Team.find_by_name(params[:game][:team1_id])
   @team_2 = Team.find_by_name(params[:game][:team2_id])
 
@@ -138,5 +136,14 @@ end
 
  def game_players
 end
+   
+ def join_game
+    @team_game = TeamGame.new(params[:game])
+    @team_game.save
 
+    @player = TeamPlayers.new(user_id: params[:game][:user_id],
+			      team_id: params[:game][:team_id])
+    @player.save
+    
+ end
 end
