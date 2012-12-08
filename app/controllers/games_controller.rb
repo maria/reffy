@@ -82,22 +82,18 @@ end
     @game = Game.find(params["id"])
   
     if @game.state == 'on'
-    respond_to do |format|
+     respond_to do |format|
       if @game.update_attributes(params[:game])
-    
         format.json { render json: @game }
       else
-
         format.json { render json: @game.errors, status: :unprocessable_entity }
       end
     end
     else
     respond_to do |format|
       if @game.update_attributes(params[:game])
-       
         format.json { render json: @game }
-      else
-       
+      else     
         format.json { render json: @game.errors, status: :unprocessable_entity }
       end
      end
@@ -126,11 +122,11 @@ end
   end
   
  def teams_for_game
- @game = Game.find(params[:id])
+   @game = Game.find(params[:id])
 
- @teams = @game.show_teams
-  respond_to do |format|
-    format.json {render json: @teams}
+   @teams = @game.show_teams
+    respond_to do |format|
+      format.json {render json: @teams}
   end
  end
 
