@@ -120,11 +120,11 @@ end
     if game.team1_id != 0 && game.team2_id != 0
       print (game.team1_id)
       game.team1_id = Team.find(game.team1_id).name
-      print Team.find(game.team1_id).name
+      print (Team.find(game.team1_id).name)
       print (game.team1_id)
       game.team2_id = Team.find(game.team2_id).name
     end
-    print game
+    print (game)
   end
 
   respond_to do |format|
