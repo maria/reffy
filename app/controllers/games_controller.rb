@@ -114,7 +114,7 @@ end
 
 
  def show_on_games
-  @all_on_games = Game.where(state: = 'on')
+  @all_on_games = Game.where("state = 'on'")
 
   @all_on_games.all.each do |game|
     game.team1_id = Team.find(game.team1_id).name
