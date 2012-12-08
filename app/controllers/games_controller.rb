@@ -117,10 +117,10 @@ end
   @all_on_games = Game.where("state = 'on'")
 
   @all_on_games.each do |game|
-    game.team1_id = Team.find(game.team1_id).select(name)
-    game.team2_id = Team.find(game.team2_id).select(name)
+    game.team1_id = Team.find(game.team1_id).name
+    game.team2_id = Team.find(game.team2_id).name
   end
-  
+
   respond_to do |format|
     format.json {render json: @all_on_games}
     end
