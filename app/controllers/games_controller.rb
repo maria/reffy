@@ -120,8 +120,8 @@ end
     if game.team1_id != 0 && game.team2_id != 0
       game.team1_id = Team.find(game.team1_id).name
       game.team2_id = Team.find(game.team2_id).name
-      @all_on_games[game] = game
     end
+  @all_on_games[game] = game
   end
 
   respond_to do |format|
