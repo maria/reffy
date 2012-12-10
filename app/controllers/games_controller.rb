@@ -114,7 +114,7 @@ end
 
 
  def show_on_games
-  @on_games = Hash.new { |h, k| h[k] = Hash.new )
+  @on_games = Hash.new { |h, k| h[k] = Hash.new }
   i = 1
 
  @all_on_games = distance(params[:latitude], params[:longitude], params[:radius])
