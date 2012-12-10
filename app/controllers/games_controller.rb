@@ -114,17 +114,35 @@ end
 
 
  def show_on_games
-  @all_on_games = Game.where("state = 'on'")
+  @on_games = Hash.new { |h, k| h[k] = Hash.new )
+  i = 1
+
+ @all_on_games = distance(params[:latitude], params[:longitude], params[:radius])
 
   @all_on_games.all.each do |game|
+
     if game.team1_id != 0 && game.team2_id != 0
-      game.team1_id = Team.find(game.team1_id).name
-      game.team2_id = Team.find(game.team2_id).name
-    end
+        @on_games['game_#{i}']['sport'] = game.sport_id
+        @on_games['game_#{i}']['duration'] = game.duration
+
+        user_id = User.find(game.user_id).fb_id
+        @on_games['game_#{i}']['user'] = user_id
+
+        @on_games['game_#{i}']['latitude'] = game.latitude
+        @on_games['game_#{i}']['longitude'] = game.longitude
+
+
+        @on_games['game_#{i}']['team1_id'] = game.team1_id
+        @on_games['game_#{i}']['team2_id'] = game.team2_id
+
+        @on_games['game_#{i}']['team1_name'] = Team.find(game.team1_id).name
+        @on_games['game_#{i}']['team2_name'] = Team.find(game.team2_id).name
+      end
+    i += 1
   end
 
   respond_to do |format|
-    format.json {render json: @all_on_games}
+    format.json {render json: @on_games}
     end
   end
   
@@ -149,4 +167,30 @@ end
     @player.save
     
  end
+
+
+ private
+
+def distance (lat, long, radius)
+    r = radius / 6371
+    lat_min = (lat - r).to_rad
+    lat_max = (lat + r).to_rad
+    long_min = (long - r).to_rad
+    long_max = (long + r).to_rad
+
+     a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+         Math.cos(lat1.to_rad) * Math.cos(lat2.to_rad) *
+         Math.sin(dLon/2) * Math.sin(dLon/2)
+
+     d = 6371 * a; # Multiply by 6371 to get Kilometers
+
+     return 
+  end
 end
+
+class Numeric
+    def to_rad
+      self * Math::PI / 180
+    end
+  end
+
