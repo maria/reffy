@@ -116,34 +116,35 @@ end
  def show_on_games
   @on_games = Hash.new { |h, k| h[k] = Hash.new }
   i = 1
-  
+
  @all_on_games = Game.where("state = 'on'")
+ print @all_on_games
 
   @all_on_games.all.each do |game|
 
     if game.team1_id != 0 && game.team2_id != 0
 
-      dist = distance(params[:latitude], params[:longitude],
-                      game.latitude, game.longitude,
-                      params[:radius])
+        dist = distance(params[:latitude], params[:longitude],
+                        game.latitude, game.longitude,
+                        params[:radius])
         if dist 
-        @on_games['game_#{i}']['sport'] = game.sport_id
-        @on_games['game_#{i}']['duration'] = game.duration
+          @on_games['game_#{i}']['sport'] = game.sport_id
+          @on_games['game_#{i}']['duration'] = game.duration
 
-        user_id = User.find(game.user_id).fb_id
-        @on_games['game_#{i}']['user'] = user_id
+          user_id = User.find(game.user_id).fb_id
+          @on_games['game_#{i}']['user'] = user_id
 
-        @on_games['game_#{i}']['latitude'] = game.latitude
-        @on_games['game_#{i}']['longitude'] = game.longitude
+          @on_games['game_#{i}']['latitude'] = game.latitude
+          @on_games['game_#{i}']['longitude'] = game.longitude
 
 
-        @on_games['game_#{i}']['team1_id'] = game.team1_id
-        @on_games['game_#{i}']['team2_id'] = game.team2_id
+          @on_games['game_#{i}']['team1_id'] = game.team1_id
+          @on_games['game_#{i}']['team2_id'] = game.team2_id
 
-        @on_games['game_#{i}']['team1_name'] = Team.find(game.team1_id).name
-        @on_games['game_#{i}']['team2_name'] = Team.find(game.team2_id).name
+          @on_games['game_#{i}']['team1_name'] = Team.find(game.team1_id).name
+          @on_games['game_#{i}']['team2_name'] = Team.find(game.team2_id).name
+       end
       end
-    end
     i += 1
   end
 
