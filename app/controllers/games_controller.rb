@@ -211,11 +211,11 @@ def distance(lat, long, glat, glong, radius)
     lat = lat.to_f
     long = long.to_f
     radius = radius.to_i
-    
+
     dlat = (lat - glat).to_rad
     dlong = (long - glong).to_rad
 
-     a = Math.sin(dlat/2) * Math.sin(dlon/2) +
+     a = Math.sin(dlat/2) * Math.sin(dlat/2) +
          Math.cos(lat.to_rad) * Math.cos(glat.to_rad) *
          Math.sin(dlong/2) * Math.sin(dlong/2)
 
