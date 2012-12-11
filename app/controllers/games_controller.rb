@@ -208,7 +208,10 @@ end
  private
 
 def distance(lat, long, glat, glong, radius)
-
+    lat = lat.to_f
+    long = long.to_f
+    radius = radius.to_i
+    
     dlat = (lat - glat).to_rad
     dlong = (long - glong).to_rad
 
