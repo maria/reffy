@@ -13,7 +13,7 @@ TeamX::Application.routes.draw do
   match 'statistics/every_game', to: 'statistics#every_team_games', via: :get, action: 'every_team_games' 
   match 'statistics/every_team_details', to: 'statistics#every_team_details', via: :get, action: 'every_team_details' 
   
-  match 'games/show_on_games', to: 'games#show_on_games', via: :get, action: 'show_on_games' 
+  match 'games/show_on_games', to: 'games#show_on_games', via: [:get, :post], action: 'show_on_games' 
   match 'games/:id/teams_for_game', to: 'games#teams_for_game', via: :get, action: 'teams_for_game' 
   match 'games/:id/join_game', to: 'games#join_game', via: :post, action: 'join_game' 
   
