@@ -15,6 +15,7 @@ TeamX::Application.routes.draw do
   
   match 'games/show_on_games', to: 'games#show_on_games', via: :get, action: 'show_on_games' 
   match 'games/:id/teams_for_game', to: 'games#teams_for_game', via: :get, action: 'teams_for_game' 
+  match 'games/:id/join_game', to: 'games#join_game', via: :post, action: 'join_game' 
   
   resources :games
 

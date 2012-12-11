@@ -159,12 +159,39 @@ end
 end
    
  def join_game
-    @team_game = TeamGame.new(params[:game])
-    @team_game.save
+    
+    @user = User.find_by_fb_id(params[:user_id])
+    @team = Team.find_by_id(params[:team_id])
+    @game = Game.find_by_id(params[:id])
 
-    @player = TeamPlayers.new(user_id: params[:game][:user_id],
-			      team_id: params[:game][:team_id])
-    @player.save
+	respond_to do |format|
+	
+		#daca id-urile oferite nu sunt bune
+		if @user.nil? || @team.nil? || @game.nil?  || (@game.team1_id != @team.id && @game.team2_id != @team.id)
+			format.json {head :status => 406 }
+		else
+			@team_game = TeamGame.new(game_id: @game.id, user_id: @user.id, team_id: @team.id)
+			
+			@existent_team_game = TeamGame.find(:first, :conditions => ["user_id = ? and game_id = ?", @user.id, @game.id])
+			
+			#daca userul exista deja in joc nu poate fi adaugat iar
+			if @existent_team_game.nil?
+				@team_game.save
+				
+				@existing_player = TeamPlayer.find(:first, :conditions => ["user_id = ? and team_id = ?", @user.id, @team.id])
+				
+				#daca intrarea exista deja in team_player nu trebuie adaugata iar
+				if @existing_player.nil?
+					@player = TeamPlayer.new(user_id: @user.id, team_id: @team.id)
+					@player.save
+				end
+				format.json { head :no_content }
+			else
+				format.json {head :status => 409 }
+			end
+			
+		end
+    end
     
  end
 
