@@ -123,7 +123,7 @@ end
   @all_on_games.all.each do |game|
 
     if game.team1_id != 0 && game.team2_id != 0
-      
+
       dist = distance(params[:latitude], params[:longitude],
                       game.latitude, game.longitude,
                       params[:radius])
@@ -222,6 +222,7 @@ def distance (lat, long, glat, glong, radius)
      else 
       return false 
   end
+end
 end
 
 class Numeric
