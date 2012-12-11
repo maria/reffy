@@ -116,8 +116,7 @@ end
  def show_on_games
   @on_games = Hash.new { |h, k| h[k] = Hash.new }
   i = 1
-
- distance = distance(params[:latitude], params[:longitude], params[:radius])
+  
  @all_on_games = Game.where("state = 'on'")
 
   @all_on_games.all.each do |game|
@@ -205,7 +204,7 @@ end
 
  private
 
-def distance (lat, long, glat, glong, radius)
+def distance(lat, long, glat, glong, radius)
 
     dlat = (lat - glat).to_rad
     dlong = (long - glong).to_rad
