@@ -143,9 +143,11 @@ end
 
           @on_games['game_#{i}']['team1_name'] = Team.find(game.team1_id).name
           @on_games['game_#{i}']['team2_name'] = Team.find(game.team2_id).name
+
+          i += 1
        end
       end
-    i += 1
+    
   end
 
   respond_to do |format|
