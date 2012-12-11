@@ -31,4 +31,5 @@ class Game < ActiveRecord::Base
  def get_team2_name
  	Team.joins('JOIN games ON games.team2_id = teams.id').where('games.id=?',self.id).select('teams.name')
  end
+  
 end

@@ -25,7 +25,7 @@ def show_played_sports
 end
 
 def all_teams
-  Team.joins('JOIN team_players ON teams.id = team_players.team_id').where('team_players.user_id = ?', self.id)
+  Team.joins('JOIN team_players ON teams.id = team_players.team_id').where('team_players.user_id = ?', self.id).select('distinct teams.name')
 end
 
 def games_played
