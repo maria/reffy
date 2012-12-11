@@ -219,7 +219,7 @@ def distance(lat, long, glat, glong, radius)
      c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
      d = 6371 * c; # Multiply by 6371 to get Kilometers
 
-     if d < R
+     if d < radius
       return true 
      else 
       return false 
