@@ -120,9 +120,10 @@ end
  @all_on_games = Game.where("state = 'on'")
  print @all_on_games
 
-  @all_on_games.all.each do |game|
+ if !@all_on_games.nil?
+      @all_on_games.all.each do |game|
 
-    if game.team1_id != 0 && game.team2_id != 0
+    if (game.team1_id != 0 && game.team2_id != 0)
 
         dist = distance(params[:latitude], params[:longitude],
                         game.latitude, game.longitude,
@@ -147,7 +148,10 @@ end
           i += 1
        end
       end
+    end
     
+    else
+       @on_games = []
   end
 
   respond_to do |format|
