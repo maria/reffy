@@ -169,6 +169,8 @@ end
    
  def join_game
     
+    @already_joined_status = "Already Joined"
+    @incorrect_params_status = "Incorrect Params"
     @user = User.find_by_fb_id(params[:user_id])
     @team = Team.find_by_id(params[:team_id])
     @game = Game.find_by_id(params[:id])
@@ -177,7 +179,7 @@ end
 	
 		#daca id-urile oferite nu sunt bune
 		if @user.nil? || @team.nil? || @game.nil?  || (@game.team1_id != @team.id && @game.team2_id != @team.id)
-			format.json {head :status => 406 }
+			format.json {render json: @incorrect_params_status, status: 406 }
 		else
 			@team_game = TeamGame.new(game_id: @game.id, user_id: @user.id, team_id: @team.id)
 			
@@ -196,12 +198,16 @@ end
 				end
 				format.json { head :no_content }
 			else
-				format.json {head :status => 409 }
+				format.json {render json: @already_joined_status, status: 409 }
 			end
 			
 		end
     end
     
+ end
+ 
+ def finish_game(game_id)
+ #TODO
  end
 
 def distance(lat, long, glat, glong, radius)
