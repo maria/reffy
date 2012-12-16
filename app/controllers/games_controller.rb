@@ -117,28 +117,37 @@ end
   @on_games = Hash.new { |h, k| h[k] = Hash.new }
   i = 1
 
- @all_on_games = distance(params[:latitude], params[:longitude], params[:radius])
+ @all_on_games = Game.where("state = 'on'")
+ print @all_on_games
 
   @all_on_games.all.each do |game|
 
     if game.team1_id != 0 && game.team2_id != 0
-        @on_games['game_#{i}']['sport'] = game.sport_id
-        @on_games['game_#{i}']['duration'] = game.duration
 
-        user_id = User.find(game.user_id).fb_id
-        @on_games['game_#{i}']['user'] = user_id
+        dist = distance(params[:latitude], params[:longitude],
+                        game.latitude, game.longitude,
+                        params[:radius])
+        if dist 
+          @on_games['game_#{i}']['sport'] = game.sport_id
+          @on_games['game_#{i}']['duration'] = game.duration
 
-        @on_games['game_#{i}']['latitude'] = game.latitude
-        @on_games['game_#{i}']['longitude'] = game.longitude
+          user_id = User.find(game.user_id).fb_id
+          @on_games['game_#{i}']['user'] = user_id
+
+          @on_games['game_#{i}']['latitude'] = game.latitude
+          @on_games['game_#{i}']['longitude'] = game.longitude
 
 
-        @on_games['game_#{i}']['team1_id'] = game.team1_id
-        @on_games['game_#{i}']['team2_id'] = game.team2_id
+          @on_games['game_#{i}']['team1_id'] = game.team1_id
+          @on_games['game_#{i}']['team2_id'] = game.team2_id
 
-        @on_games['game_#{i}']['team1_name'] = Team.find(game.team1_id).name
-        @on_games['game_#{i}']['team2_name'] = Team.find(game.team2_id).name
+          @on_games['game_#{i}']['team1_name'] = Team.find(game.team1_id).name
+          @on_games['game_#{i}']['team2_name'] = Team.find(game.team2_id).name
+
+          i += 1
+       end
       end
-    i += 1
+    
   end
 
   respond_to do |format|
@@ -195,24 +204,27 @@ end
     
  end
 
+def distance(lat, long, glat, glong, radius)
+    lat = lat.to_f
+    long = long.to_f
+    radius = radius.to_i
 
- private
+    dlat = (lat - glat).to_rad
+    dlong = (long - glong).to_rad
 
-def distance (lat, long, radius)
-    r = radius / 6371
-    lat_min = (lat - r).to_rad
-    lat_max = (lat + r).to_rad
-    long_min = (long - r).to_rad
-    long_max = (long + r).to_rad
+     a = Math.sin(dlat/2) * Math.sin(dlat/2) +
+         Math.cos(lat.to_rad) * Math.cos(glat.to_rad) *
+         Math.sin(dlong/2) * Math.sin(dlong/2)
 
-     a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-         Math.cos(lat1.to_rad) * Math.cos(lat2.to_rad) *
-         Math.sin(dLon/2) * Math.sin(dLon/2)
+     c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
+     d = 6371 * c; # Multiply by 6371 to get Kilometers
 
-     d = 6371 * a; # Multiply by 6371 to get Kilometers
-
-     return 
+     if d < radius
+      return true 
+     else 
+      return false 
   end
+end
 end
 
 class Numeric
