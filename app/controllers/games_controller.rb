@@ -114,11 +114,8 @@ end
 
 
  def show_on_games
-  @on_games = Hash.new { |h, k| h[k] = Hash.new }
-  i = 1
-#Add private = false
- @all_on_games = Game.where("state = 'on'")
- print @all_on_games
+  @on_games =[]
+  @all_on_games = Game.where("state = 'on'")
 
  if !@all_on_games.nil?
       @all_on_games.all.each do |game|
@@ -129,22 +126,25 @@ end
                         game.latitude, game.longitude,
                         params[:radius])
         if dist 
-          @on_games['game_#{i}']['sport'] = game.sport_id
-          @on_games['game_#{i}']['duration'] = game.duration
-
-          @on_games['game_#{i}']['latitude'] = game.latitude
-          @on_games['game_#{i}']['longitude'] = game.longitude
-
-          @on_games['game_#{i}']['team1_id'] = game.team1_id
-          @on_games['game_#{i}']['team2_id'] = game.team2_id
-
-          @on_games['game_#{i}']['team1_name'] = Team.find(game.team1_id).name
-          @on_games['game_#{i}']['team2_name'] = Team.find(game.team2_id).name
-
-          i += 1
-       end
+          
+          @on_game = OnGame.new
+          @on_game.team1_name = Team.find(game.team1_id).name
+          @on_game.team2_name = Team.find(game.team2_id).name
+          @on_game.duration = game.duration
+          @on_game.state = game.state
+          @on_game.team1_id = game.team1_id
+          @on_game.team2_id = game.team2_id
+          @on_game.latitude = game.latitude
+          @on_game.longitude = game.longitude
+          @on_game.scor_team1 = game.scor_team1
+          @on_game.scor_team2 = game.scor_team2
+          @on_game.sport_id = game.sport_id
+          @on_game.game_id = game.id
+          
+          @on_games << @on_game
       end
     end
+   end
     
     else
        @on_games = []
@@ -169,6 +169,8 @@ end
    
  def join_game
     
+    @already_joined_status = "Already Joined"
+    @incorrect_params_status = "Incorrect Params"
     @user = User.find_by_fb_id(params[:user_id])
     @team = Team.find_by_id(params[:team_id])
     @game = Game.find_by_id(params[:id])
@@ -177,7 +179,7 @@ end
 	
 		#daca id-urile oferite nu sunt bune
 		if @user.nil? || @team.nil? || @game.nil?  || (@game.team1_id != @team.id && @game.team2_id != @team.id)
-			format.json {head :status => 406 }
+			format.json {render json: @incorrect_params_status, status: 406 }
 		else
 			@team_game = TeamGame.new(game_id: @game.id, user_id: @user.id, team_id: @team.id)
 			
@@ -196,12 +198,16 @@ end
 				end
 				format.json { head :no_content }
 			else
-				format.json {head :status => 409 }
+				format.json {render json: @already_joined_status, status: 409 }
 			end
 			
 		end
     end
     
+ end
+ 
+ def finish_game(game_id)
+ #TODO
  end
 
 def distance(lat, long, glat, glong, radius)
@@ -225,6 +231,10 @@ def distance(lat, long, glat, glong, radius)
       return false 
   end
 end
+end
+
+class OnGame
+    attr_accessor :team1_name, :team2_name, :duration, :latitude, :longitude, :scor_team1, :scor_team2, :state, :team1_id, :team2_id, :sport_id, :start_date, :game_id
 end
 
 class Numeric
