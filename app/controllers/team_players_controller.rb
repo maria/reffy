@@ -43,11 +43,11 @@ class TeamPlayersController < ApplicationController
     @team = Team.find_by_name(params["team_id"])
     
     if !@team.nil?
-   	 params['users'].each do |userel|
-  	 @user = User.find_by_fb_id(userel.id)
+   	 params['users'].each do |user|
+  	 @user = User.find_by_fb_id(user[:id])
 
          if @user.nil?
-            @user  = User.new(fb_id: userel.id, name: userel.name)
+            @user  = User.new(fb_id: user[:id], name: user[:name])
  	 	
          @team_player = TeamPlayer.new(user_id: @user.id, team_id: @team.id)
 
