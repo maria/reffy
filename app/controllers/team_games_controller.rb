@@ -80,4 +80,12 @@ class TeamGamesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def team_game_players
+  @users = []
+  
+  respond_to do |format|
+    format.json {render json: @users}
+    end
+  end
 end
