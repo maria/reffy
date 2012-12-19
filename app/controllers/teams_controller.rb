@@ -40,28 +40,38 @@ class TeamsController < ApplicationController
   # POST /teams
   # POST /teams.json
   def create
+    @team = Team.find_by_name(params[:team][:team_name])
+    if @team.nil?
     @team = Team.new(captain_id: params[:team][:captain_id],
 		     team_name: params[:team][:team_name])
 
     respond_to do |format|
       if @team.save
          format.json { render json: @team, status: :created, location: @team }
-         TeamPlayers.create(params[:players], team_name: @team.name)
+         if params[:players]
+         	TeamPlayers.create(params[:players], team_name: @team.name)
+         end
       else
         format.json { render json: @team.errors, status: :unprocessable_entity }
       end
     end
+   else 
+     Team.update(params[:team])
+   end
   end
 
   # PUT /teams/1
   # PUT /teams/1.json
   def update
-    @team = Team.find(params[:id])
+    @team = Team.find(params[:team][:team_id])
 
     respond_to do |format|
       if @team.update_attributes(params[:team])
         format.html { redirect_to @team, notice: 'Team was successfully updated.' }
         format.json { head :no_content }
+        if params[:players]
+            TeamPlayers.update(params[:players], team_name: @team.name)
+        end
       else
         format.html { render action: "edit" }
         format.json { render json: @team.errors, status: :unprocessable_entity }
@@ -82,7 +92,7 @@ class TeamsController < ApplicationController
   end
 
   def count_all_games
-    @team = Team.find(params["id"])
+    @team = Team.find(params[:id])
 
     @count_games = @team.count_all_games
 
@@ -92,7 +102,7 @@ class TeamsController < ApplicationController
   end
 
   def show_all_games
-    @team = Team.find(params["id"])
+    @team = Team.find(params[:id])
 
     @all_games = @team.show_all_games
 
@@ -125,7 +135,7 @@ end
     end
   end
 
-  def get_team_members
+  def team_members
     @team = Team.find(params["id"])
     @members = @team.get_team_members
 

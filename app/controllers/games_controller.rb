@@ -207,6 +207,7 @@ end
  end
  
  def finish_game(game_id)
+ #we can run game.update(:state = 'off')
  #TODO
  end
 

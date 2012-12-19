@@ -41,27 +41,30 @@ class TeamPlayersController < ApplicationController
   # POST /team_players.json
   def create
     @team = Team.find_by_name(params["team_id"])
-  
-    params['players'].each do |userel|
-    @user = User.find_by_fb_id(userel["user_id"])
+    
+    if !@team.nil?
+   	 params['users'].each do |user|
+  	 @user = User.find_by_fb_id(user[:id])
 
-      if @user.nil?
-          @user  = User.new(userel)
-      
-      @team_player = TeamPlayer.new(user_id: @user.id, team_id: @team.id)
+         if @user.nil?
+            @user  = User.new(fb_id: user[:id], name: user[:name])
+ 	 	
+         @team_player = TeamPlayer.new(user_id: @user.id, team_id: @team.id)
 
-    end
-  end
+        end
+      end
 
     respond_to do |format|
       if @team_player.save
-        
         format.json { render json: @team_player, status: :created, location: @team_player }
       else
-
         format.json { render json: @team_player.errors, status: :unprocessable_entity }
       end
     end
+
+   else 
+      Team.create(params[:team])
+   end
   end
 
   # PUT /team_players/1
