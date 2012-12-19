@@ -124,6 +124,19 @@ def show_all_games
       format.json {render json: @all_games}
     end
   end
+  
+def send_mails
+	
+	@mails = params["mails"]
+	@mails.each do |mail|
+		MyMailer.welcome_email(mail).deliver
+	end
+	
+	respond_to do |format|
+      format.json { head :no_content }
+    end
+	
+end
 
 end
 
