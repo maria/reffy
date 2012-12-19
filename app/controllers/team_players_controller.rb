@@ -42,7 +42,7 @@ class TeamPlayersController < ApplicationController
   def create
     @team = Team.find_by_name(params["team_id"])
     
-    if @team.nil?
+    if !@team.nil?
    	 params['users'].each do |userel|
   	 @user = User.find_by_fb_id(userel.id)
 
@@ -56,7 +56,6 @@ class TeamPlayersController < ApplicationController
 
     respond_to do |format|
       if @team_player.save
-        
         format.json { render json: @team_player, status: :created, location: @team_player }
       else
         format.json { render json: @team_player.errors, status: :unprocessable_entity }
@@ -64,9 +63,7 @@ class TeamPlayersController < ApplicationController
     end
 
    else 
-      respond_to do |format|
-         format.json {render json: @team, status: :existing}
-       end
+      Team.create(params[:team])
    end
   end
 

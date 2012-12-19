@@ -40,6 +40,8 @@ class TeamsController < ApplicationController
   # POST /teams
   # POST /teams.json
   def create
+    @team = Team.find_by_name(params[:team][:team_name])
+    if @team.nil?
     @team = Team.new(captain_id: params[:team][:captain_id],
 		     team_name: params[:team][:team_name])
 
@@ -53,6 +55,9 @@ class TeamsController < ApplicationController
         format.json { render json: @team.errors, status: :unprocessable_entity }
       end
     end
+   else 
+     Team.update(params[:team])
+   end
   end
 
   # PUT /teams/1
