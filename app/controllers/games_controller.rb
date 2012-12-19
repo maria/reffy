@@ -114,8 +114,7 @@ end
 
 
  def show_on_games
-  @on_games = Hash.new { |h, k| h[k] = Hash.new }
-  i = 1
+  @on_games =[]
 
  @all_on_games = Game.where("state = 'on'")
  print @all_on_games
@@ -128,23 +127,23 @@ end
                         game.latitude, game.longitude,
                         params[:radius])
         if dist 
-          @on_games['game_#{i}']['sport'] = game.sport_id
-          @on_games['game_#{i}']['duration'] = game.duration
+          
+          @on_game = OnGame.new
+          @on_game.team1_name = Team.find(game.team1_id).name
+          @on_game.team2_name = Team.find(game.team2_id).name
+          @on_game.duration = game.duration
+          @on_game.state = game.state
+          @on_game.team1_id = game.team1_id
+          @on_game.team2_id = game.team2_id
+          @on_game.latitude = game.latitude
+          @on_game.longitude = game.longitude
+          @on_game.scor_team1 = game.scor_team1
+          @on_game.scor_team2 = game.scor_team2
+          @on_game.sport_id = game.sport_id
+          @on_game.game_id = game.id
+          
+          @on_games << @on_game
 
-          user_id = User.find(game.user_id).fb_id
-          @on_games['game_#{i}']['user'] = user_id
-
-          @on_games['game_#{i}']['latitude'] = game.latitude
-          @on_games['game_#{i}']['longitude'] = game.longitude
-
-
-          @on_games['game_#{i}']['team1_id'] = game.team1_id
-          @on_games['game_#{i}']['team2_id'] = game.team2_id
-
-          @on_games['game_#{i}']['team1_name'] = Team.find(game.team1_id).name
-          @on_games['game_#{i}']['team2_name'] = Team.find(game.team2_id).name
-
-          i += 1
        end
       end
     
@@ -231,6 +230,10 @@ def distance(lat, long, glat, glong, radius)
       return false 
   end
 end
+end
+
+class OnGame
+    attr_accessor :team1_name, :team2_name, :duration, :latitude, :longitude, :scor_team1, :scor_team2, :state, :team1_id, :team2_id, :sport_id, :start_date, :game_id
 end
 
 class Numeric
