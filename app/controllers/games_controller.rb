@@ -128,8 +128,8 @@ end
         if dist 
           
           @on_game = OnGame.new
-          @on_game.team1_name = Team.find(game.team1_id).name
-          @on_game.team2_name = Team.find(game.team2_id).name
+          @on_game.team1_name = Team.find_by_name(game.team1_id).name
+          @on_game.team2_name = Team.find_by_name(game.team2_id).name
           @on_game.duration = game.duration
           @on_game.state = game.state
           @on_game.team1_id = game.team1_id

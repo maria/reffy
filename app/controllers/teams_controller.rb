@@ -130,7 +130,7 @@ end
     end
   end
 
-  def get_team_members
+  def team_members
     @team = Team.find(params["id"])
     @members = @team.get_team_members
 
