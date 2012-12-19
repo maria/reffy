@@ -39,8 +39,10 @@ class UserGamesController < ApplicationController
   # POST /user_games
   # POST /user_games.json
   def create
-    params[:user_game][:id] = User.find_by_fb_id(params[:id]).id
-    @user_game = UserGame.new(params[:user_game])
+    @user =  User.find_by_fb_id(params[:id])
+     if !@user.nil?
+          params[:user_game][:id] = @user.id
+          @user_game = UserGame.new(params[:user_game])
 
     respond_to do |format|
       if @user_game.save
@@ -49,7 +51,13 @@ class UserGamesController < ApplicationController
         format.json { render json: @user_game.errors }
       end
     end
+    else 
+    respond_to do |format|
+        @message = "User doesn't exist"
+        format.json { render json: @message }
+    end
   end
+end
 
   # PUT /user_games/1
   # PUT /user_games/1.json
