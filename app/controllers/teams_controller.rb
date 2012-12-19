@@ -40,11 +40,13 @@ class TeamsController < ApplicationController
   # POST /teams
   # POST /teams.json
   def create
-    @team = Team.new(params[:team])
+    @team = Team.new(captain_id: params[:team][:captain_id],
+		     team_name: params[:team][:team_name])
 
     respond_to do |format|
       if @team.save
          format.json { render json: @team, status: :created, location: @team }
+         TeamPlayers.create(params[:players], team_name: @team.name)
       else
         format.json { render json: @team.errors, status: :unprocessable_entity }
       end
