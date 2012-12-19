@@ -7,6 +7,8 @@ class Team < ActiveRecord::Base
   has_many :games2, :class_name => "Game", foreign_key: 'team2_id'
   
   has_many :game_players, class_name: "User", through: :team_games, foreign_key: 'team_id'
+ 
+  validates :name, uniqueness: true
 
   def count_all_games
     Game.joins('JOIN teams ON (games.team1_id = teams.id OR games.team2_id = teams.id)').where("(team1_id = :id OR team2_id = :id) AND state = :stat",{id: self.id, stat:"off"}).count	
