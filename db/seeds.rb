@@ -73,7 +73,7 @@ User.create(name:'Barra Zoltan',city:'Bucuresti',fb_id:'258355739940503',email: 
 
 
 
-Team.create(name:'Fighting Geckos',captain_id:1,open:true,team_status:true)
+Team.create(name:'Fighting Geckos',captain_id:1)
 Team.create(name:'Team Extreme',captain_id:2,open:true,team_status:true)
 Team.create(name:'Dream Team',captain_id:3,open:true,team_status:true)
 Team.create(name:'Team Omega',captain_id:4,open:true,team_status:true)
