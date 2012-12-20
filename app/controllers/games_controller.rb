@@ -15,8 +15,8 @@ class GamesController < ApplicationController
   def show
     @game = Game.find(params[:id])
 
-    @game.team1_id = Team.find(@game.team1_id).select(:name)
-    @game.team2_id = Team.find(@game.team2_id).select(:name)
+    #@game.team1_id = Team.find(@game.team1_id).select(:name)
+    #@game.team2_id = Team.find(@game.team2_id).select(:name)
 
     respond_to do |format|
       format.html # show.html.erb

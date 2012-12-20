@@ -47,8 +47,10 @@ class TeamPlayersController < ApplicationController
   	 @user = User.find_by_fb_id(user[:id])
 
          if @user.nil?
-            @user  = User.new(fb_id: user[:id], name: user[:name])
-            @user.save
+            @user = User.new(fb_id: user[:id], name: user[:name])
+        
+			# this should be done, but we need email
+			#@user.save
          end
  	 	
          @team_player = TeamPlayer.new(user_id: @user.id, team_id: @team.id)
