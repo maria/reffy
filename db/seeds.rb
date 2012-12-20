@@ -103,16 +103,16 @@ Team.create(name:'the Fighters',captain_id:50,open:true,team_status:true)
 
 
 
-Game.create(latitude:"44.437711",longitude:"26.097367",scor_team1:1,scor_team2:0,duration:45,team1_id:1,team2_id:2,state:"on",sport_id:1,privacy:true)
-Game.create(latitude:"44.437731",longitude:"26.097357",scor_team1:4,scor_team2:1,duration:5,team1_id:3, team2_id:4, state:"on",sport_id:1,privacy:true)
-Game.create(latitude:"44.435311",longitude:"26.097367",scor_team1:4,scor_team2:3,duration:96,team1_id:5, team2_id:6, state:"off",sport_id:1,privacy:true)
-Game.create(latitude:"44.432001",longitude:"26.086367",scor_team1:1,scor_team2:2,duration:76,team1_id:7, team2_id:8, state:"on",sport_id:1,privacy:true)
-Game.create(latitude:"44.432311",longitude:"26.084367",scor_team1:0,scor_team2:3,duration:81,team1_id:9, team2_id:10, state:"on",sport_id:1,privacy:true)
-Game.create(latitude:"44.435011",longitude:"26.107367",scor_team1:2,scor_team2:1,duration:20,team1_id:17, team2_id:18, state:"on",sport_id:1,privacy:true)
-Game.create(latitude:"44.433511",longitude:"26.086267",scor_team1:1,scor_team2:3,duration:55,team1_id:19, team2_id:20, state:"on",sport_id:1,privacy:true)
-Game.create(latitude:"44.435311",longitude:"26.102328",scor_team1:2,scor_team2:2,duration:45,team1_id:21, team2_id:22, state:"on",sport_id:1,privacy:true)
-Game.create(latitude:"44.434511",longitude:"26.102228",scor_team1:0,scor_team2:0,duration:30,team1_id:15, team2_id:16, state:"on",sport_id:1,privacy:true)
-Game.create(latitude:"44.435211",longitude:"26.102528",scor_team1:2,scor_team2:2,duration:78,team1_id:25, team2_id:26, state:"on",sport_id:1,privacy:true)
+Game.create(latitude:"44.437711",longitude:"26.097367",scor_team1:1,scor_team2:0,duration:45,team1_id:1,team2_id:2,state:'on',sport_id:1,privacy:true)
+Game.create(latitude:"44.437731",longitude:"26.097357",scor_team1:4,scor_team2:1,duration:5,team1_id:3, team2_id:4, state:'on',sport_id:1,privacy:true)
+Game.create(latitude:"44.435311",longitude:"26.097367",scor_team1:4,scor_team2:3,duration:96,team1_id:5, team2_id:6, state:'off',sport_id:1,privacy:true)
+Game.create(latitude:"44.432001",longitude:"26.086367",scor_team1:1,scor_team2:2,duration:76,team1_id:7, team2_id:8, state:'on',sport_id:1,privacy:true)
+Game.create(latitude:"44.432311",longitude:"26.084367",scor_team1:0,scor_team2:3,duration:81,team1_id:9, team2_id:10, state:'on',sport_id:1,privacy:true)
+Game.create(latitude:"44.435011",longitude:"26.107367",scor_team1:2,scor_team2:1,duration:20,team1_id:17, team2_id:18, state:'on',sport_id:1,privacy:true)
+Game.create(latitude:"44.433511",longitude:"26.086267",scor_team1:1,scor_team2:3,duration:55,team1_id:19, team2_id:20, state:'on',sport_id:1,privacy:true)
+Game.create(latitude:"44.435311",longitude:"26.102328",scor_team1:2,scor_team2:2,duration:45,team1_id:21, team2_id:22, state:'on',sport_id:1,privacy:true)
+Game.create(latitude:"44.434511",longitude:"26.102228",scor_team1:0,scor_team2:0,duration:30,team1_id:15, team2_id:16, state:'on',sport_id:1,privacy:true)
+Game.create(latitude:"44.435211",longitude:"26.102528",scor_team1:2,scor_team2:2,duration:78,team1_id:25, team2_id:26, state:'on',sport_id:1,privacy:true)
 
 
 
