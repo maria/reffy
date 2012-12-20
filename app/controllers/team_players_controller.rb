@@ -48,18 +48,20 @@ class TeamPlayersController < ApplicationController
 
          if @user.nil?
             @user  = User.new(fb_id: user[:id], name: user[:name])
+            @user.save
+         end
  	 	
          @team_player = TeamPlayer.new(user_id: @user.id, team_id: @team.id)
+         @team_player.save
 
-        end
       end
 
     respond_to do |format|
-      if @team_player.save
+      #if @team_player.save
         format.json { render json: @team_player, status: :created, location: @team_player }
-      else
-        format.json { render json: @team_player.errors, status: :unprocessable_entity }
-      end
+      #else
+      #  format.json { render json: @team_player.errors, status: :unprocessable_entity }
+      #end
     end
 
    else 
