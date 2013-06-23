@@ -54,8 +54,11 @@ ActiveRecord::Schema.define(:version => 20121208145413) do
   create_table "teams", :force => true do |t|
     t.string   "name"
     t.integer  "captain_id"
+    t.integer  "sport_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "user_id"
+    t.integer  "game_id"
     t.boolean  "open"
     t.boolean  "team_status"
   end
@@ -75,14 +78,6 @@ ActiveRecord::Schema.define(:version => 20121208145413) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "user_games", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "game_id"
-    t.integer  "points"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "users", :force => true do |t|
     t.string   "name"
     t.string   "initial"
@@ -91,6 +86,8 @@ ActiveRecord::Schema.define(:version => 20121208145413) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "fb_id"
+    t.integer  "team_id"
+    t.integer  "sport_id"
     t.integer  "sport"
   end
 
