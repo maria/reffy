@@ -6,7 +6,7 @@ development:
   pool: 8
   timeout: 5000
   user: root
-  password: mysql
+  password: root
 
 test:
   adapter: mysql2
@@ -16,7 +16,7 @@ test:
   pool: 8
   timeout: 5000
   user: root
-  password: mysql
+  password: root
 
 production:
   adapter: postgresql
